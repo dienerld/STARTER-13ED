@@ -8,6 +8,20 @@ const CustomInput = styled.input`
 	border: none;
 	font-size: ${(props) => props.theme.fontSizes.md};
 
+	/* & => utilizado quando precisamos referenciar o proprio elemento => neste caso o input */
+	/* 
+	
+		esteElemento:focus {
+
+		}
+
+		esteElemento:hover {
+
+		}
+
+		etc
+	
+	*/
 	&:focus {
 		outline: none;
 	}
