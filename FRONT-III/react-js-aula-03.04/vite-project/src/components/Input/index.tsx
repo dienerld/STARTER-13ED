@@ -1,4 +1,5 @@
 import React from 'react';
+import CustomInput from './styles';
 
 interface InputProps {
 	name: string;
@@ -18,10 +19,15 @@ const Input: React.FC<InputProps> = ({
 	showLabel,
 }) => {
 	return (
-		<div>
+		<>
 			{showLabel && <label htmlFor={id}>{label}</label>}
-			<input type={type} placeholder={placeholder} id={id} name={name} />
-		</div>
+			<CustomInput
+				type={type}
+				placeholder={placeholder}
+				id={id}
+				name={name}
+			/>
+		</>
 	);
 };
 

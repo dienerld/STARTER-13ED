@@ -1,5 +1,5 @@
 import React from 'react';
-import TitleDefault from '../../components/TitleDefault';
+import TitleDefault from '../../components/Heading';
 
 const Login: React.FC = () => {
 	return <TitleDefault title={'Login'} />;
