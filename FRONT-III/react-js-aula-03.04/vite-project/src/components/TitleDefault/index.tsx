@@ -1,11 +1,12 @@
 import React from 'react';
+import Heading from './styles';
 
 interface TitleDefaultProps {
 	title: string;
 }
 
 const TitleDefault: React.FC<TitleDefaultProps> = (props) => {
-	return <h1>{props.title}</h1>;
+	return <Heading color="#FFF">{props.title}</Heading>;
 };
 
 export default TitleDefault;

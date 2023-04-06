@@ -1,7 +1,7 @@
 // import reactLogo from '/assets/images/react.svg';
 // import viteLogo from '/assets/images/vite.svg';
 
-import AppRoutes from './routes/AppRoutes';
+import AppRoutes from './configs/routes/AppRoutes';
 
 function App() {
 	return <AppRoutes />;
