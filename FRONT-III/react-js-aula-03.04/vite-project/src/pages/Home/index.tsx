@@ -2,6 +2,9 @@ import React from 'react';
 import TitleDefault from '../../components/Heading';
 import Input from '../../components/Input';
 import Container from '../../components/Container/styles';
+import listaTarefas from '../../database';
+import Card from '../../components/Card';
+import ButtonStyled from '../../components/Button/styles';
 
 const Home: React.FC = () => {
 	return (
@@ -14,14 +17,28 @@ const Home: React.FC = () => {
 				type="text"
 			/>
 
+			<ButtonStyled>Adicionar</ButtonStyled>
+
 			{/* 
 
 				TO-DO
-				1 - Criar uma lista de tarefas (definir types e criar o mock de registros)
-				2 - Criar componente do Card
-				3 - Renderizar um Card para cada tarefa da lista  
+				1 - Criar uma lista de tarefas (definir types e criar o mock de registros) OK
+				2 - Criar componente do Card - OK
+				3 - Renderizar um Card para cada tarefa da lista - OK
+				4 - Criar o Componente Button do App - OK
 
 			*/}
+
+			{listaTarefas.map(({ id, criadoEm, titulo }) => {
+				return (
+					<Card
+						key={id}
+						id={id}
+						titulo={titulo}
+						criadoEm={criadoEm}
+					/>
+				);
+			})}
 		</Container>
 	);
 };
