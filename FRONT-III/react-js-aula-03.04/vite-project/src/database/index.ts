@@ -1,6 +1,6 @@
-import { Tarefa } from '../types';
-import gerarData from '../utils/geradorData';
 import { v4 as gerarId } from 'uuid';
+import { Tarefa } from '../types';
+import { gerarData } from '../utils/geradorData';
 
 const listaTarefas: Tarefa[] = [
 	{

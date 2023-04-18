@@ -1,23 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ButtonStyled from '../../components/Button/styles';
+import Card from '../../components/Card';
+import Container from '../../components/Container/styles';
 import TitleDefault from '../../components/Heading';
 import Input from '../../components/Input';
-import Container from '../../components/Container/styles';
-import listaTarefas from '../../database';
-import Card from '../../components/Card';
-import ButtonStyled from '../../components/Button/styles';
+import { Tarefa } from '../../types';
+import { gerarData, gerarId } from '../../utils/geradorData';
+// import listaTarefas from '../../database';
 
 const Home: React.FC = () => {
+	// estados de um componente
+	const [titulo, setTitulo] = useState('');
+	const [listaTarefas, setListaTarefas] = useState<Tarefa[]>([]);
+
+	// 1 - se uma função não precisa de parametros, dai chama no evento sem a necessidade da arrow function e abre e fecha parenteses da função
+
+	// 2- Sempre que tiver parametros a rotina/função a gente monta uma () => que aponta para execução desta rotina
+	const addNewCard = () => {
+		const novaTarefa: Tarefa = {
+			id: gerarId(),
+			titulo: titulo,
+			criadoEm: gerarData(),
+		}
+
+		setListaTarefas( (prevState) => [novaTarefa, ...prevState])
+		setTitulo('')
+	}
+
+
 	return (
 		<Container display="flex" alignItems="center" flexDirection="column">
 			<TitleDefault title="Lista de Tarefas" />
 			<Input
+				valor={titulo}
+				handleChange={setTitulo}
 				id="task"
 				name="tarefa"
 				placeholder="Descreva a tarefa..."
 				type="text"
+				
 			/>
 
-			<ButtonStyled>Adicionar</ButtonStyled>
+			<ButtonStyled onClick={addNewCard}>Adicionar</ButtonStyled>
 
 			{/* 
 

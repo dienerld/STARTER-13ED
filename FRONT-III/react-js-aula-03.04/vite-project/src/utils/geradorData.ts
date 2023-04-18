@@ -8,4 +8,11 @@ function gerarData() {
 	}); // dd/mm/aaaa, 07:45:00
 }
 
-export default gerarData;
+function gerarId(): string {
+
+	return `${new Date().getTime()}`
+
+}
+
+export { gerarData, gerarId };
+
