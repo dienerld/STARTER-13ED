@@ -31,6 +31,13 @@ const Home: React.FC = () => {
 		console.log('LISTA TAREFAS ATUALIZOU - componente renderou novamente');
 	}, [listaTarefas]);
 
+	// 2 - quando o componente atualiza - re-renderizou
+	useEffect(() => {
+		if (titulo.length < 5) {
+			console.log('possui menos que 5 caracteres');
+		}
+	}, [titulo]);
+
 	// 4 - toda e qualquer alteração que tiver - SEMPRE
 	useEffect(() => {
 		console.log('SEM DEPENDENCIAS');
