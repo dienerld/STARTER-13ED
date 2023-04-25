@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Heading from './styles';
 
 interface TitleDefaultProps {
@@ -6,10 +6,12 @@ interface TitleDefaultProps {
 }
 
 const TitleDefault: React.FC<TitleDefaultProps> = (props) => {
-	return <Heading color="#FFF">{props.title}</Heading>;
+	return <Heading color='#FFF'>{props.title}</Heading>;
 };
 
-export default TitleDefault;
+const Title = memo(TitleDefault);
+
+export default Title;
 
 // Array<string>
 // string[]

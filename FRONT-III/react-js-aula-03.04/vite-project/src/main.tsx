@@ -1,8 +1,8 @@
-import React from 'react'; // biblioteca
+import React from 'react';
 import ReactDOM from 'react-dom/client'; // biblioteca
-import App from './App'; // componente
 import { ThemeProvider } from 'styled-components';
-import { dark, light } from './configs/theme';
+import App from './App'; // componente
+import { dark } from './configs/theme';
 import GlobalStyles from './styles/GlobalStyles';
 
 // 3A ETAPA - UTILIZAR O THEME PROVIDER
