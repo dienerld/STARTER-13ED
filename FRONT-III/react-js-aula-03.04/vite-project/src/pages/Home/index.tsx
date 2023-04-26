@@ -1,4 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react';
 import { Link } from 'react-router-dom';
 import ButtonStyled from '../../components/Button/styles';
 import Card from '../../components/Card';
@@ -11,8 +17,10 @@ import { gerarData, gerarId } from '../../utils/geradorData';
 
 const Home: React.FC = () => {
 	// estados de um componente
-	const [titulo, setTitulo] = useState('');
+	// const [titulo, setTitulo] = useState('');
+	const inputRef = useRef<null | HTMLInputElement>(null);
 	const [listaTarefas, setListaTarefas] = useState<Tarefa[]>([]);
+	const [counter, setCounter] = useState(0);
 
 	// 1 - quando o componente monta
 	useEffect(() => {
@@ -33,14 +41,16 @@ const Home: React.FC = () => {
 
 	// 2 - quando o componente atualiza - re-renderizou
 	useEffect(() => {
-		if (titulo.length < 5) {
-			console.log('possui menos que 5 caracteres');
+		if (inputRef.current && inputRef.current?.value.length < 5) {
+			console.log('tem menos que 5 caracteres');
 		}
-	}, [titulo]);
+	}, [inputRef.current]);
 
 	// 4 - toda e qualquer alteração que tiver - SEMPRE
 	useEffect(() => {
 		console.log('SEM DEPENDENCIAS');
+
+		handleCounterA();
 	});
 
 	// const TitleMemo = useMemo(() => {
@@ -51,15 +61,35 @@ const Home: React.FC = () => {
 
 	// 2- Sempre que tiver parametros a rotina/função a gente monta uma () => que aponta para execução desta rotina
 	const addNewCard = () => {
-		const novaTarefa: Tarefa = {
-			id: gerarId(),
-			titulo: titulo,
-			criadoEm: gerarData(),
-		};
+		if (inputRef.current) {
+			const novaTarefa: Tarefa = {
+				id: gerarId(),
+				titulo: inputRef.current.value,
+				criadoEm: gerarData(),
+			};
 
-		setListaTarefas((prevState) => [novaTarefa, ...prevState]);
-		setTitulo('');
+			setListaTarefas((prevState) => [novaTarefa, ...prevState]);
+		}
 	};
+
+	const listaMemo = useMemo(() => {
+		return listaTarefas.map(({ id, criadoEm, titulo }) => {
+			return (
+				<Card
+					key={id}
+					id={id}
+					titulo={titulo}
+					criadoEm={criadoEm}
+				/>
+			);
+		});
+	}, [listaTarefas]);
+
+	const handleCounterA = useCallback(() => {
+		setCounter(
+			listaTarefas.filter((tarefa) => tarefa.titulo.includes('a')).length
+		);
+	}, [listaTarefas]);
 
 	return (
 		<Container
@@ -68,38 +98,19 @@ const Home: React.FC = () => {
 			flexDirection='column'
 		>
 			<Title title='Lista de Tarefas' />
-			<Input
-				valor={titulo}
-				handleChange={setTitulo}
-				id='task'
-				name='tarefa'
-				placeholder='Descreva a tarefa...'
-				type='text'
-			/>
+			<Input ref={inputRef} />
 
 			<ButtonStyled onClick={addNewCard}>Adicionar</ButtonStyled>
 
-			{/* 
+			{listaMemo}
+			<Link
+				to='/signin'
+				style={{ color: 'white' }}
+			>
+				Logout
+			</Link>
 
-				TO-DO
-				1 - Criar uma lista de tarefas (definir types e criar o mock de registros) OK
-				2 - Criar componente do Card - OK
-				3 - Renderizar um Card para cada tarefa da lista - OK
-				4 - Criar o Componente Button do App - OK
-
-			*/}
-
-			{listaTarefas.map(({ id, criadoEm, titulo }) => {
-				return (
-					<Card
-						key={id}
-						id={id}
-						titulo={titulo}
-						criadoEm={criadoEm}
-					/>
-				);
-			})}
-			<Link to='/signin'>Logout</Link>
+			<h4>{counter}</h4>
 		</Container>
 	);
 };
