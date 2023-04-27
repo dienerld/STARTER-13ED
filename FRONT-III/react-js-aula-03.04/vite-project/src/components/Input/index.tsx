@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import CustomInput from './styles';
 
 interface InputProps {
@@ -10,19 +10,25 @@ interface InputProps {
 	id: string;
 }
 
-const InputRef = forwardRef<HTMLInputElement>((props, ref) => {
+const InputRef: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+	{ id, name, placeholder, type, label, showLabel },
+	ref
+) => {
 	return (
-		<CustomInput
-			ref={ref}
-			type={'text'}
-			placeholder={'Escreva uma tarefa'}
-			id={'task'}
-			name={'task'}
-		/>
+		<>
+			{showLabel && <label htmlFor={id}>{label}</label>}
+			<CustomInput
+				ref={ref}
+				type={type}
+				placeholder={placeholder}
+				id={id}
+				name={name}
+			/>
+		</>
 	);
-});
+};
 
-export default InputRef;
+export default forwardRef(InputRef);
 
 // const [titulo, setTitulo] = useState('Teste'); // array[0, 1] = 'Teste' => valor inicial deste estado
 // 	const [usuarios, setUsuarios] = useState<User[]>([{ email: 'joao@teste', password: '123'}, { email: 'maria@teste', password: '1223'}]);

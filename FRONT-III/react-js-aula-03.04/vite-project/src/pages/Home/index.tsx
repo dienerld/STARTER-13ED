@@ -98,7 +98,13 @@ const Home: React.FC = () => {
 			flexDirection='column'
 		>
 			<Title title='Lista de Tarefas' />
-			<Input ref={inputRef} />
+			<Input
+				ref={inputRef}
+				id='task'
+				name='Tarefa'
+				placeholder='Escreva a tarefa...'
+				type='text'
+			/>
 
 			<ButtonStyled onClick={addNewCard}>Adicionar</ButtonStyled>
 
