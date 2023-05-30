@@ -1,7 +1,6 @@
 // modelo dos dados da aplicação/api
 
 interface Usuario {
-	id: string;
 	email: string;
 	password: string;
 }

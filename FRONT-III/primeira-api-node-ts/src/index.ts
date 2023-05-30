@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { Request, Response } from 'express';
 import { v4 as gerarId } from 'uuid';
 import { transacoes, usuarios } from './database';
@@ -6,6 +7,9 @@ import { Transacao, Usuario } from './types';
 const app = express();
 
 app.use(express.json()); // configurar alguma coisa ou config que o express vai usar nas requisições e respostas
+
+// LIBERAR AS REQUISIÇÕES DE QUALQUER FRONT END
+app.use(cors());
 
 app.use(express.urlencoded({ extended: false })); // %20% => space
 
@@ -59,7 +63,6 @@ app.post('/usuarios/cadastro', (request: Request, response: Response) => {
 
 	// TUDO CERTO PRA CADASTRAR UM NOVO USUÁRIO
 	const novoUsuario: Usuario = {
-		id: gerarId(),
 		email,
 		password: senha,
 	};
