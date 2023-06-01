@@ -155,7 +155,7 @@ app.post(
 		// ROUTE PARAMS - ele é obrigatório
 		// transação vai/deve ser criada para o usuario que possui o email informado na rota
 		const { emailUsuario } = request.params;
-		const { type, description, value } = request.body;
+		const { type, description, value, createdAt } = request.body;
 
 		//validar se existe um usuário com o email informado na rota
 		if (!usuarios.some((usuario) => usuario.email === emailUsuario)) {
@@ -197,7 +197,7 @@ app.post(
 			description,
 			value,
 			type,
-			createdAt: new Date().toISOString().split('T')[0], // YYYY-mm-dd
+			createdAt, // YYYY-mm-dd
 			createdBy: emailUsuario,
 		};
 
