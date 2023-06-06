@@ -56,6 +56,8 @@ class Casa {
 
 	calcularMetrosQuadrados(): number {
 		// escrevam essa lógica
+
+		return 10; // troquem pelo resultado do calculo
 	}
 }
 
