@@ -1,12 +1,5 @@
+import GerenteComercial from './contratos/gerente-comercial.contract';
 import Funcionario from './funcionario.class';
-
-// INTERFACE - protótipo de ações possiveis e que serão implementadas na classe
-// implementa apenas métodos
-interface GerenteComercial {
-	receberAdicional: () => void;
-	atualizarDados: (novoNome: string, novoCpf: string) => void;
-	mostrarDados: () => void;
-}
 
 // herança - extends Funcionario
 // encapsulamento - implements GerenteComercial
