@@ -2,9 +2,6 @@ import express from 'express';
 
 const app = express();
 
-// MIDDLEWARES - intermediario - Ex: autenticação de rotas
-// JSON
-
 // torna desnecessario a utilizacao do JSON.parse() e JSON.stringify()
 app.use(express.json());
 
