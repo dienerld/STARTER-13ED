@@ -1,9 +1,9 @@
 import Usuario, { UsuarioDTO } from './usuario.class';
 
-type ClienteDTO = UsuarioDTO & { endereco: Array<any> };
+type ClienteDTO = UsuarioDTO & { endereco?: Array<any> };
 
-class Cliente extends Usuario {
-	endereco: Array<any>;
+export class Cliente extends Usuario {
+	endereco?: Array<any>;
 
 	constructor(dados: ClienteDTO) {
 		super({
@@ -31,5 +31,3 @@ class Cliente extends Usuario {
 		return objCliente;
 	}
 }
-
-export default Cliente;

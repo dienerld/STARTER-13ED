@@ -1,4 +1,6 @@
 import express from 'express';
+import { ClientesController } from './controllers';
+import { validarCPF, validarDadosUsuario } from './middlewares';
 
 const app = express();
 
@@ -15,5 +17,34 @@ app.listen(8080, () => {
 
 // AS DEFINIÇÕES DAS ROTAS
 app.get('/', (request, response) => {
-	return response.send('ok');
+	return response.json('API LOJA VIRTUAL NO AR 🚀');
 });
+
+// ===============================================
+// CLIENTES
+const controllerClientes = new ClientesController();
+// POST - CADASTRAR CLIENTE
+app.post(
+	'/clientes',
+	validarDadosUsuario,
+	validarCPF,
+	controllerClientes.cadastrar
+);
+
+// GET - LISTAR CLIENTES
+
+// PUT - ATUALIZAR CLIENTES
+
+// DELETE - EXCLUIR CLIENTES
+
+// ===============================================
+// ENDEREÇOS
+
+// ===============================================
+// PAGAMENTOS
+
+// ===============================================
+// PRODUTOS
+
+// ===============================================
+// CARRINHO
