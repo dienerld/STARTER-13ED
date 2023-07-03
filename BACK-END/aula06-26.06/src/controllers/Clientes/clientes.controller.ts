@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CadastrarCliente } from '../../usecases/Clientes';
+import { CadastrarCliente, ListarClientes } from '../../usecases/Clientes';
 
 export class ClientesController {
 	// CREATE
@@ -25,6 +25,15 @@ export class ClientesController {
 	}
 
 	// LIST ALL
+	public listar(request: Request, response: Response) {
+		const usecase = new ListarClientes();
+		const resposta = usecase.execute();
+
+		if (!resposta.sucesso) {
+			return response.status(404).json(resposta);
+		}
+		return response.status(200).json(resposta);
+	}
 
 	// LIST BY ID
 

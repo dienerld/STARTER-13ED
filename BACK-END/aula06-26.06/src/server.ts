@@ -32,7 +32,7 @@ app.post(
 );
 
 // GET - LISTAR CLIENTES
-
+app.get('/clientes', controllerClientes.listar);
 // PUT - ATUALIZAR CLIENTES
 
 // DELETE - EXCLUIR CLIENTES
