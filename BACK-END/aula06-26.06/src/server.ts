@@ -1,6 +1,11 @@
 import express from 'express';
 import { ClientesController } from './controllers';
-import { validarCPF, validarDadosUsuario } from './middlewares';
+import {
+	validarAtualizacaoCamposCliente,
+	validarCPF,
+	validarDadosUsuario,
+	validarIdCliente,
+} from './middlewares';
 
 const app = express();
 
@@ -23,6 +28,7 @@ app.get('/', (request, response) => {
 // ===============================================
 // CLIENTES
 const controllerClientes = new ClientesController();
+
 // POST - CADASTRAR CLIENTE
 app.post(
 	'/clientes',
@@ -33,7 +39,14 @@ app.post(
 
 // GET - LISTAR CLIENTES
 app.get('/clientes', controllerClientes.listar);
+
 // PUT - ATUALIZAR CLIENTES
+app.put(
+	'/clientes/:idCliente',
+	validarIdCliente,
+	validarAtualizacaoCamposCliente,
+	controllerClientes.atualizar
+);
 
 // DELETE - EXCLUIR CLIENTES
 

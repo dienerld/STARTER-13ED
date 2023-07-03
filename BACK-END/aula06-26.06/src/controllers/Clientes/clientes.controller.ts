@@ -38,6 +38,13 @@ export class ClientesController {
 	// LIST BY ID
 
 	// UPDATE
+	public atualizar(request: Request, response: Response) {
+		const { idCliente } = request.params;
+		const { nome_completo, telefone, email } = request.body;
+
+		// instanciar o caso de uso
+		// executar o caso de uso
+	}
 
 	// DELETE
 }
