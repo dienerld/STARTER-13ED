@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
-import { CadastrarCliente, ListarClientes } from '../../usecases/Clientes';
+import {
+	AtualizarCliente,
+	CadastrarCliente,
+	ListarClientes,
+} from '../../usecases/Clientes';
 
 export class ClientesController {
 	// CREATE
@@ -43,7 +47,21 @@ export class ClientesController {
 		const { nome_completo, telefone, email } = request.body;
 
 		// instanciar o caso de uso
+		const usecase = new AtualizarCliente({
+			idCliente,
+			nome: nome_completo,
+			email,
+			telefone,
+		});
+
 		// executar o caso de uso
+		const retorno = usecase.execute();
+
+		if (!retorno.sucesso) {
+			return response.status(404).json(retorno);
+		}
+
+		return response.status(200).json(retorno);
 	}
 
 	// DELETE

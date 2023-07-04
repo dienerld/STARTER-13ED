@@ -1,3 +1,4 @@
+import { AtualizarClienteDTO } from '../usecases/Clientes';
 import Usuario, { UsuarioDTO } from './usuario.class';
 
 type ClienteDTO = UsuarioDTO & { endereco?: Array<any> };
@@ -29,5 +30,19 @@ export class Cliente extends Usuario {
 		};
 
 		return objCliente;
+	}
+
+	public atualizarDados(novosDados: Omit<AtualizarClienteDTO, 'idCliente'>) {
+		if (novosDados.email) {
+			this.email = novosDados.email;
+		}
+
+		if (novosDados.nome) {
+			this.nome_completo = novosDados.nome;
+		}
+
+		if (novosDados.telefone) {
+			this.telefone = novosDados.telefone;
+		}
 	}
 }

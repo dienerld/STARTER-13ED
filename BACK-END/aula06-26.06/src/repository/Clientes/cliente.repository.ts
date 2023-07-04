@@ -1,7 +1,11 @@
 import { randomUUID } from 'crypto';
 import { Cliente } from '../../classes';
 import { clientes } from '../../database';
-import { CadastrarClienteDTO, ClienteSemSenha } from '../../usecases/Clientes';
+import {
+	AtualizarClienteDTO,
+	CadastrarClienteDTO,
+	ClienteSemSenha,
+} from '../../usecases/Clientes';
 
 export class ClientesRepository {
 	public existeCPFCadastrado(cpf: string): boolean {
@@ -34,5 +38,20 @@ export class ClientesRepository {
 
 			return cliente;
 		});
+	}
+
+	public buscarClientePorID(idCliente: string): number {
+		return clientes.findIndex(
+			(cliente) => cliente.toJSON().id === idCliente
+		);
+	}
+
+	public atualizarCliente(
+		posicao: number,
+		novosDados: Omit<AtualizarClienteDTO, 'idCliente'>
+	): Cliente {
+		clientes[posicao].atualizarDados(novosDados);
+
+		return clientes[posicao];
 	}
 }
