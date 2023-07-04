@@ -45,4 +45,17 @@ export class Cliente extends Usuario {
 			this.telefone = novosDados.telefone;
 		}
 	}
+
+	public retornaClienteSemSenha() {
+		const objCliente = {
+			id: this.id,
+			nome_completo: this.nome_completo,
+			telefone: this.telefone,
+			email: this.email,
+			cpf: this.cpf,
+			endereco: this.endereco,
+		};
+
+		return objCliente;
+	}
 }

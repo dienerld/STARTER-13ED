@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import {
 	AtualizarCliente,
 	CadastrarCliente,
+	DeletarCliente,
 	ListarClientes,
 } from '../../usecases/Clientes';
 
@@ -65,4 +66,17 @@ export class ClientesController {
 	}
 
 	// DELETE
+
+	public deletar(request: Request, response: Response) {
+		const { idCliente } = request.params;
+
+		const usecase = new DeletarCliente(idCliente);
+
+		const retorno = usecase.execute();
+
+		if (!retorno.sucesso) {
+			return response.status(404).json(retorno);
+		}
+		return response.status(200).json(retorno);
+	}
 }

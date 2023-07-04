@@ -1,6 +1,5 @@
-import { Cliente } from '../../classes';
 import { ClientesRepository } from '../../repository/Clientes';
-import { CadastrarClienteDTO } from './';
+import { CadastrarClienteDTO, ClienteSemSenha } from './';
 
 export type AtualizarClienteDTO = Partial<
 	Omit<CadastrarClienteDTO, 'cpf' | 'senha'>
@@ -9,7 +8,7 @@ export type AtualizarClienteDTO = Partial<
 type RetornoAtualizacao = {
 	sucesso: boolean;
 	mensagem: string;
-	dadoAtualizado?: Cliente;
+	dadoAtualizado?: ClienteSemSenha;
 };
 
 export class AtualizarCliente {

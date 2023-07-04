@@ -28,16 +28,7 @@ export class ClientesRepository {
 	}
 
 	public listarClientes(): ClienteSemSenha[] {
-		return clientes.map((valor) => {
-			const cliente = {
-				...valor.toJSON(),
-				senha: undefined,
-			};
-
-			delete cliente.senha;
-
-			return cliente;
-		});
+		return clientes.map((valor) => valor.retornaClienteSemSenha());
 	}
 
 	public buscarClientePorID(idCliente: string): number {
@@ -49,9 +40,13 @@ export class ClientesRepository {
 	public atualizarCliente(
 		posicao: number,
 		novosDados: Omit<AtualizarClienteDTO, 'idCliente'>
-	): Cliente {
+	): ClienteSemSenha {
 		clientes[posicao].atualizarDados(novosDados);
 
-		return clientes[posicao];
+		return clientes[posicao].retornaClienteSemSenha();
+	}
+
+	public deletarCliente(posicao: number): Cliente {
+		return clientes.splice(posicao, 1)[0];
 	}
 }

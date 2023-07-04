@@ -50,6 +50,12 @@ app.put(
 
 // DELETE - EXCLUIR CLIENTES
 
+app.delete(
+	'/clientes/:idCliente',
+	validarIdCliente,
+	controllerClientes.deletar
+);
+
 // ===============================================
 // ENDEREÇOS
 
