@@ -1,10 +1,12 @@
 import express from 'express';
-import { ClientesController } from './controllers';
+import { ClientesController, ProdutosController } from './controllers';
 import {
 	validarAtualizacaoCamposCliente,
 	validarCPF,
+	validarCamposDeProduto,
 	validarDadosUsuario,
 	validarIdCliente,
+	validarTipoPreco,
 } from './middlewares';
 
 const app = express();
@@ -64,6 +66,15 @@ app.delete(
 
 // ===============================================
 // PRODUTOS
+
+const controllerProdutos = new ProdutosController();
+
+app.post(
+	'/produtos',
+	validarCamposDeProduto,
+	validarTipoPreco,
+	controllerProdutos.criar
+);
 
 // ===============================================
 // CARRINHO
