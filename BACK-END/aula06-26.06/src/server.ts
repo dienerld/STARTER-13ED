@@ -6,6 +6,7 @@ import {
 	validarCamposDeProduto,
 	validarDadosUsuario,
 	validarIdCliente,
+	validarParametrosFiltragemProdutos,
 	validarTipoPreco,
 } from './middlewares';
 
@@ -69,12 +70,28 @@ app.delete(
 
 const controllerProdutos = new ProdutosController();
 
+// CADASTRAR - usuario admin
 app.post(
 	'/produtos',
 	validarCamposDeProduto,
 	validarTipoPreco,
 	controllerProdutos.criar
 );
+
+// LISTAGEM - filtrar por min preco, max preco, ordem crescente e descrecente de nome (A-Z ou Z-A), preco ordenado crescente ou decrescente, nome do produto
+app.get(
+	'/produtos',
+	validarParametrosFiltragemProdutos,
+	controllerProdutos.listar
+);
+
+// valor_min
+// valor_max
+// nome_cresc
+// nome_decresc
+// preco_cresc
+// preco_decresc
+// nome_produto  "Smartphone"
 
 // ===============================================
 // CARRINHO
