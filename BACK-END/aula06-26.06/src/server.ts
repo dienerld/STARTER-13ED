@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import { ClientesController, ProdutosController } from './controllers';
 import {
@@ -19,8 +20,9 @@ app.use(express.json());
 // Ex: %20 => ' '
 app.use(express.urlencoded({ extended: false }));
 
-app.listen(8080, () => {
-	console.log('Servidor rodando na porta 8080');
+//
+app.listen(process.env.PORTA, () => {
+	console.log(`Servidor rodando na porta ${process.env.PORTA}`);
 });
 
 // AS DEFINIÇÕES DAS ROTAS
