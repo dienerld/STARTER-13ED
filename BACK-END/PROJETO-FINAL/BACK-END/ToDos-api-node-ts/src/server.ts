@@ -2,6 +2,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
 import { UserController } from './controllers';
+import { validateDataUser } from './middlewares';
 
 const app = express();
 const userController = new UserController();
@@ -20,4 +21,4 @@ app.get('/', (req, res) => {
 	return res.send({ message: 'OK' });
 });
 
-app.post('/users', userController.create);
+app.post('/users', validateDataUser, userController.create);
