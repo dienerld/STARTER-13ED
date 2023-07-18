@@ -1,6 +1,6 @@
 import { databaseUsers } from '../../database';
 import { User } from '../../models';
-import { UserDTO } from '../../usecases';
+import { LoginDTO, UserDTO } from '../../usecases';
 
 export class UserRepository {
 	//ver usuarios
@@ -15,5 +15,18 @@ export class UserRepository {
 		databaseUsers.push(user);
 
 		return user.toJson();
+	}
+
+	findUserByCredentials(dados: LoginDTO) {
+		// ou retorna uma string (ID) ou undefined (não achar o user pelas credenciais)
+		const user = databaseUsers.find(
+			(i) =>
+				i.toJson().email === dados.email &&
+				i.toJson().password === dados.password
+		);
+
+		if (!user) return;
+
+		return user.toJson().id;
 	}
 }
