@@ -1,3 +1,3 @@
-import { User } from '../models/User/user.class';
+import { User } from '../models';
 
 export const databaseUsers: User[] = [];
