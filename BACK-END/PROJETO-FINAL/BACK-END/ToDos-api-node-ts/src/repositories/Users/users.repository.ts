@@ -3,9 +3,8 @@ import { User } from '../../models';
 import { LoginDTO, UserDTO } from '../../usecases';
 
 export class UserRepository {
-	//ver usuarios
 	listUsers() {
-		const users: User[] = databaseUsers; // 0x000021345 => referencia em memoria e pro valor
+		const users: User[] = databaseUsers;
 
 		return users.map((user) => user.toJson());
 	}
@@ -18,7 +17,6 @@ export class UserRepository {
 	}
 
 	findUserByCredentials(dados: LoginDTO) {
-		// ou retorna uma string (ID) ou undefined (não achar o user pelas credenciais)
 		const user = databaseUsers.find(
 			(i) =>
 				i.toJson().email === dados.email &&
