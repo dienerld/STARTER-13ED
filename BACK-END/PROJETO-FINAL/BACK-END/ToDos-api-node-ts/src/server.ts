@@ -21,3 +21,5 @@ const userController = new UserController();
 app.get('/', (req, res) => res.send({ message: 'OK' }));
 app.post('/users/signup', validateDataUser, userController.create);
 app.post('/users/signin', validateUserLogin, userController.signin);
+
+// CRUD
