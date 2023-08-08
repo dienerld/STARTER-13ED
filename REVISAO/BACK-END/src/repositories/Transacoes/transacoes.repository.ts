@@ -13,6 +13,12 @@ type Filtros = {
 	valorMax?: number;
 };
 
+type AtualizarDTO = {
+	idTransacao: string;
+	valor?: number;
+	tipo?: TipoTransacao;
+};
+
 export class TransacoesRepository {
 	public cadastrar(dados: CadastrarDTO): Transacao {
 		const { valor, tipo, usuario } = dados;
@@ -70,5 +76,18 @@ export class TransacoesRepository {
 					t.toJSON().id === idTransacao
 			)
 			?.toJSON();
+	}
+
+	public atualizarTransacao(dados: AtualizarDTO): TransacaoJSON {
+		const indiceTransacao = transacoes.findIndex(
+			(t) => t.toJSON().id === dados.idTransacao
+		);
+
+		transacoes[indiceTransacao].atualizarDetalhes({
+			valor: dados.valor,
+			tipo: dados.tipo,
+		});
+
+		return transacoes[indiceTransacao].toJSON();
 	}
 }

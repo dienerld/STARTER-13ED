@@ -34,7 +34,11 @@ app.get(
 	'/usuarios/:idUsuario/transacoes/:idTransacao',
 	TransacaoController.listarPorID
 );
-app.put('/usuarios/:idUsuario/transacoes/:idTransacao');
+app.put(
+	'/usuarios/:idUsuario/transacoes/:idTransacao',
+	validarValorETipoTransacao,
+	TransacaoController.atualizar
+);
 app.delete('/usuarios/:idUsuario/transacoes/:idTransacao');
 
 export default app; // essa linha adiciona

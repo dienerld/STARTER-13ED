@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { TipoTransacao } from '../../models';
 import {
+	AtualizarTransacao,
 	CadastrarTransacao,
 	ListarPorID,
 	ListarTransacoes,
@@ -48,6 +49,25 @@ export class TransacaoController {
 		const resultado = usecase.execute({
 			idUsuario,
 			idTransacao,
+		});
+
+		if (!resultado.sucesso) {
+			return res.status(404).json(resultado);
+		}
+
+		return res.status(200).json(resultado);
+	}
+
+	public static atualizar(req: Request, res: Response) {
+		const { idUsuario, idTransacao } = req.params;
+		const { tipo, valor } = req.body;
+
+		// regra de negocio
+		const usecase = new AtualizarTransacao();
+		const resultado = usecase.execute({
+			idUsuario,
+			idTransacao,
+			novosDados: { tipo, valor },
 		});
 
 		if (!resultado.sucesso) {

@@ -7,14 +7,14 @@ export function validarValorETipoTransacao(
 ) {
 	const { valor, tipo } = req.body;
 
-	if (typeof valor !== 'number') {
+	if (valor && typeof valor !== 'number') {
 		return res.status(400).json({
 			sucesso: false,
 			mensagem: 'O valor precisa ser do tipo numérico.',
 		});
 	}
 
-	if (tipo !== 'entrada' && tipo !== 'saida') {
+	if (tipo && tipo !== 'entrada' && tipo !== 'saida') {
 		return res.status(400).json({
 			sucesso: false,
 			mensagem: 'O tipo precisa ser "entrada" ou "saida".',
