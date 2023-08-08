@@ -7,6 +7,12 @@ type CadastrarDTO = {
 	tipo: TipoTransacao;
 };
 
+type Filtros = {
+	tipo?: TipoTransacao;
+	valorMin?: number;
+	valorMax?: number;
+};
+
 export class TransacoesRepository {
 	public cadastrar(dados: CadastrarDTO): Transacao {
 		const { valor, tipo, usuario } = dados;
@@ -38,9 +44,18 @@ export class TransacoesRepository {
 		return soma;
 	}
 
-	public listarTransacoesDeUmUsuario(idUsuario: string): TransacaoJSON[] {
+	public listarTransacoesDeUmUsuario(
+		idUsuario: string,
+		filtros?: Filtros
+	): TransacaoJSON[] {
 		return transacoes
-			.filter((transacao) => transacao.toJSON().autor.id === idUsuario)
+			.filter((transacao) => {
+				const { autor, tipo } = transacao.toJSON();
+
+				return filtros?.tipo
+					? autor.id === idUsuario && tipo === filtros.tipo
+					: autor.id === idUsuario;
+			})
 			.map((t) => t.toJSON());
 	}
 }

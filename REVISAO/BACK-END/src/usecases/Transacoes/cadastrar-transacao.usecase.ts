@@ -7,7 +7,7 @@ type CadastrarTransacaoDTO = {
 	tipo: TipoTransacao;
 };
 
-type RetornoTransacoes = {
+export type RetornoTransacoes = {
 	sucesso: boolean;
 	mensagem: string;
 	dados: {

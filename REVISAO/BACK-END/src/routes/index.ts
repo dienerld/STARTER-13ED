@@ -3,6 +3,7 @@ import { TransacaoController, UsuariosController } from '../controllers';
 import {
 	validarDadosUsuario,
 	validarEnvioDadosTransacao,
+	validarTipoTransacao,
 	validarValorETipoTransacao,
 } from '../middlewares';
 
@@ -24,7 +25,11 @@ app.post(
 	validarValorETipoTransacao,
 	TransacaoController.cadastrar
 );
-app.get('/usuarios/:idUsuario/transacoes');
+app.get(
+	'/usuarios/:idUsuario/transacoes',
+	validarTipoTransacao,
+	TransacaoController.listarTodas
+);
 app.get('/usuarios/:idUsuario/transacoes/:idTransacao');
 app.put('/usuarios/:idUsuario/transacoes/:idTransacao');
 app.delete('/usuarios/:idUsuario/transacoes/:idTransacao');
