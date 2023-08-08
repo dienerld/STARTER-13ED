@@ -3,6 +3,7 @@ import { TipoTransacao } from '../../models';
 import {
 	AtualizarTransacao,
 	CadastrarTransacao,
+	DeletarTransacao,
 	ListarPorID,
 	ListarTransacoes,
 } from '../../usecases';
@@ -68,6 +69,23 @@ export class TransacaoController {
 			idUsuario,
 			idTransacao,
 			novosDados: { tipo, valor },
+		});
+
+		if (!resultado.sucesso) {
+			return res.status(404).json(resultado);
+		}
+
+		return res.status(200).json(resultado);
+	}
+
+	public static deletar(req: Request, res: Response) {
+		const { idUsuario, idTransacao } = req.params;
+
+		// regra de negocio
+		const usecase = new DeletarTransacao();
+		const resultado = usecase.execute({
+			idUsuario,
+			idTransacao,
 		});
 
 		if (!resultado.sucesso) {

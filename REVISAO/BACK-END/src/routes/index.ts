@@ -39,6 +39,9 @@ app.put(
 	validarValorETipoTransacao,
 	TransacaoController.atualizar
 );
-app.delete('/usuarios/:idUsuario/transacoes/:idTransacao');
+app.delete(
+	'/usuarios/:idUsuario/transacoes/:idTransacao',
+	TransacaoController.deletar
+);
 
 export default app; // essa linha adiciona

@@ -90,4 +90,14 @@ export class TransacoesRepository {
 
 		return transacoes[indiceTransacao].toJSON();
 	}
+
+	public deletarTransacao(idTransacao: string): TransacaoJSON {
+		const indiceTransacao = transacoes.findIndex(
+			(t) => t.toJSON().id === idTransacao
+		);
+
+		const [transacaoExcluida] = transacoes.splice(indiceTransacao, 1);
+
+		return transacaoExcluida.toJSON();
+	}
 }
