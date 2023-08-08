@@ -1,6 +1,6 @@
 import { usuarios } from '../../database';
 import { Usuario } from '../../models';
-import { CadastrarLogarUsuarioDTO } from '../../usecases/Usuarios/cadastrar-usuario.usecase';
+import { CadastrarLogarUsuarioDTO } from '../../usecases';
 
 export class UsuariosRepository {
 	public verificarSeExisteUsuarioPorEmail(email: string): boolean {
