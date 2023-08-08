@@ -25,4 +25,8 @@ export class UsuariosRepository {
 			return user.email === dados.email && user.senha === dados.senha;
 		});
 	}
+
+	public buscaUsuarioPorID(idUsuario: string): Usuario | undefined {
+		return usuarios.find((usuario) => usuario.toJSON().id === idUsuario);
+	}
 }

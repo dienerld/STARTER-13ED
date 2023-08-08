@@ -1,11 +1,19 @@
-import { Base, Usuario } from '.';
+import { Base, Usuario, UsuarioJSON } from '.';
 
-type TipoTransacao = 'entrada' | 'saida';
+export type TipoTransacao = 'entrada' | 'saida';
 
 type AtualizarTransacaoDTO = {
 	valor?: number;
 	tipo?: TipoTransacao;
 	dataLancamento?: Date;
+};
+
+export type TransacaoJSON = {
+	id: string;
+	valor: number;
+	tipo: TipoTransacao;
+	criadoEm: Date;
+	autor: Omit<UsuarioJSON, 'senha'>;
 };
 
 export class Transacao extends Base {
@@ -20,13 +28,16 @@ export class Transacao extends Base {
 		this._dataLancamento = new Date();
 	}
 
-	public toJSON() {
+	public toJSON(): TransacaoJSON {
 		return {
 			id: this._id,
 			valor: this._valor,
 			tipo: this._tipo,
 			criadoEm: this._dataLancamento,
-			autor: this._autor.toJSON(),
+			autor: {
+				id: this._autor.toJSON().id,
+				email: this._autor.toJSON().email,
+			},
 		};
 	}
 

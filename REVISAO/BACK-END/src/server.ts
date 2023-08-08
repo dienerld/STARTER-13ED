@@ -1,8 +1,12 @@
 import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
-import { UsuariosController } from './controllers';
-import { validarDadosUsuario } from './middlewares';
+import { TransacaoController, UsuariosController } from './controllers';
+import {
+	validarDadosUsuario,
+	validarEnvioDadosTransacao,
+	validarValorETipoTransacao,
+} from './middlewares';
 
 const app = express();
 
@@ -27,3 +31,24 @@ app.post(
 
 // logar
 app.post('/usuarios/login', validarDadosUsuario, UsuariosController.logar);
+
+// TRANSAÇÕES
+// cadastrar
+app.post(
+	'/usuarios/:idUsuario/transacoes',
+	validarEnvioDadosTransacao,
+	validarValorETipoTransacao,
+	TransacaoController.cadastrar
+);
+
+// listagem com filtros
+app.get('/usuarios/:idUsuario/transacoes');
+
+// listar por id
+app.get('/usuarios/:idUsuario/transacoes/:idTransacao');
+
+// atualização
+app.put('/usuarios/:idUsuario/transacoes/:idTransacao');
+
+// delete
+app.delete('/usuarios/:idUsuario/transacoes/:idTransacao');
