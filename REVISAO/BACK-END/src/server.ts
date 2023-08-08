@@ -19,5 +19,11 @@ app.get('/', (req, res) => res.status(200).json({ message: 'OK' }));
 
 // USUARIOS
 // cadastrar
-app.post('/usuarios', validarDadosUsuario, UsuariosController.cadastrar);
+app.post(
+	'/usuarios/cadastro',
+	validarDadosUsuario,
+	UsuariosController.cadastrar
+);
+
 // logar
+app.post('/usuarios/login', validarDadosUsuario, UsuariosController.logar);

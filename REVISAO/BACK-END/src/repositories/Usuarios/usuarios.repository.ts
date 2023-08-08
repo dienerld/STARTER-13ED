@@ -1,6 +1,6 @@
 import { usuarios } from '../../database';
 import { Usuario } from '../../models';
-import { CadastrarUsuarioDTO } from '../../usecases/Usuarios/cadastrar-usuario.usecase';
+import { CadastrarLogarUsuarioDTO } from '../../usecases/Usuarios/cadastrar-usuario.usecase';
 
 export class UsuariosRepository {
 	public verificarSeExisteUsuarioPorEmail(email: string): boolean {
@@ -9,10 +9,20 @@ export class UsuariosRepository {
 		return usuarios.some((usuario) => usuario.toJSON().email === email);
 	}
 
-	public cadastrar(dados: CadastrarUsuarioDTO): Usuario {
+	public cadastrar(dados: CadastrarLogarUsuarioDTO): Usuario {
 		const novoUsuario = new Usuario(dados.email, dados.senha);
 
 		usuarios.push(novoUsuario);
 		return novoUsuario;
+	}
+
+	public autenticacaoLogin(
+		dados: CadastrarLogarUsuarioDTO
+	): Usuario | undefined {
+		return usuarios.find((usuario) => {
+			const user = usuario.toJSON();
+
+			return user.email === dados.email && user.senha === dados.senha;
+		});
 	}
 }
