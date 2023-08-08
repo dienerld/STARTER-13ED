@@ -21,7 +21,7 @@ export class ListarTransacoes {
 			return {
 				sucesso: false,
 				mensagem:
-					'Usuário não encontrado. Não foi possível cadastrar a transação.',
+					'Usuário não encontrado. Não foi possível listar as transações.',
 				dados: {
 					saldo: 0,
 				},

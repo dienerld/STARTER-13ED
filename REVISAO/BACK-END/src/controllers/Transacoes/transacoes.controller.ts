@@ -1,6 +1,10 @@
 import { Request, Response } from 'express';
 import { TipoTransacao } from '../../models';
-import { CadastrarTransacao, ListarTransacoes } from '../../usecases';
+import {
+	CadastrarTransacao,
+	ListarPorID,
+	ListarTransacoes,
+} from '../../usecases';
 
 export class TransacaoController {
 	public static cadastrar(req: Request, res: Response) {
@@ -31,6 +35,23 @@ export class TransacaoController {
 
 		if (!resultado.sucesso) {
 			return res.status(401).json(resultado);
+		}
+
+		return res.status(200).json(resultado);
+	}
+
+	public static listarPorID(req: Request, res: Response) {
+		const { idUsuario, idTransacao } = req.params;
+
+		// regra de negocio
+		const usecase = new ListarPorID();
+		const resultado = usecase.execute({
+			idUsuario,
+			idTransacao,
+		});
+
+		if (!resultado.sucesso) {
+			return res.status(404).json(resultado);
 		}
 
 		return res.status(200).json(resultado);

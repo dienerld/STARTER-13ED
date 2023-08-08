@@ -30,7 +30,10 @@ app.get(
 	validarTipoTransacao,
 	TransacaoController.listarTodas
 );
-app.get('/usuarios/:idUsuario/transacoes/:idTransacao');
+app.get(
+	'/usuarios/:idUsuario/transacoes/:idTransacao',
+	TransacaoController.listarPorID
+);
 app.put('/usuarios/:idUsuario/transacoes/:idTransacao');
 app.delete('/usuarios/:idUsuario/transacoes/:idTransacao');
 

@@ -58,4 +58,17 @@ export class TransacoesRepository {
 			})
 			.map((t) => t.toJSON());
 	}
+
+	public buscarPorID(
+		idUsuario: string,
+		idTransacao: string
+	): TransacaoJSON | undefined {
+		return transacoes
+			.find(
+				(t) =>
+					t.toJSON().autor.id === idUsuario &&
+					t.toJSON().id === idTransacao
+			)
+			?.toJSON();
+	}
 }
