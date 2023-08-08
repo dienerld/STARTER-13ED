@@ -1,5 +1,5 @@
+import { RetornoTransacoes } from '..';
 import { TransacoesRepository, UsuariosRepository } from '../../repositories';
-import { RetornoTransacoes } from './cadastrar-transacao.usecase';
 
 type ListarPorIdDTO = {
 	idUsuario: string;
