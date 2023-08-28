@@ -9,6 +9,8 @@ Arquitetura em camadas.
 
 ### Main
 
+Arquivos de configuração e inicialização de recursos.
+
 * ```config/server```: configuração do express
 * ```config/database```: configuração do typeorm
 * ```config/routes```: definição base das rotas
@@ -18,6 +20,8 @@ Arquitetura em camadas.
   * Apontar o início do app para este arquivo no package.json
 
 ### App
+
+Organização das features e recursos em comum entre funcionalidades.
 
 * ```shared```: pasta com funcionalidades compartilhadas por mais de uma feature. Entities e migrations do typeorm ficam aqui. HttpHelper e demais utils também.
 * ```models```: modelagem de classes (foco em POO e seus pilares)
