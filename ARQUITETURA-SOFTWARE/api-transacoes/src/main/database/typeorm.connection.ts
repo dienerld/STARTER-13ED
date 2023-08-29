@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import typeorm from '../config/database.config';
+import { typeorm } from '../config';
 
 export class DatabaseConnection {
 	private static _connection: DataSource;

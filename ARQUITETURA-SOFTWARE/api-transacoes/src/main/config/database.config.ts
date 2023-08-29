@@ -1,32 +1,17 @@
 import 'dotenv/config';
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { DataSource } from 'typeorm';
 
-const env = process.env.NODE_ENV as string;
+const isProduction = process.env.NODE_ENV?.toLocaleLowerCase() === 'production';
+const rootDir = isProduction ? 'dist' : 'src';
 
-let configuracoes: DataSourceOptions = {
+export const typeorm = new DataSource({
 	type: 'postgres',
 	url: process.env.DATABASE_URL,
 	synchronize: false,
 	logging: false,
-};
-
-if (env == 'developer') {
-	configuracoes = {
-		...configuracoes,
-		entities: ['src/'],
-		migrations: ['src/'],
-		ssl: {
-			rejectUnauthorized: false,
-		},
-	};
-}
-
-if (env == 'production') {
-	configuracoes = {
-		...configuracoes,
-		entities: ['dist/'],
-		migrations: ['dist/'],
-	};
-}
-
-export default new DataSource(configuracoes);
+	ssl: {
+		rejectUnauthorized: false,
+	},
+	entities: [rootDir + '/app/shared/database/entities/**/*'],
+	migrations: [rootDir + '/app/shared/database/migrations/**/*'],
+});

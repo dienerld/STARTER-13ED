@@ -1,15 +1,15 @@
 import cors from 'cors';
 import express from 'express';
-import { makeRoutes } from './routes.config';
+import { rotasApp } from '.';
 
 // config de middlewares
-export function app() {
+export function criaServidor() {
 	const app = express();
 	app.use(express.json());
 	app.use(express.urlencoded({ extended: false }));
 	app.use(cors());
 
-	makeRoutes(app);
+	rotasApp(app);
 
 	return app;
 }
