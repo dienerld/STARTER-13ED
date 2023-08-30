@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 import { typeorm } from '../config';
 
 export class DatabaseConnection {
-	private static _connection: DataSource;
+	private static _connection: DataSource | null = null;
 
 	public static get connection(): DataSource {
 		if (!this._connection) {
