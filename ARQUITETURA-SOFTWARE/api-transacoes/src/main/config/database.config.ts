@@ -1,12 +1,12 @@
-import 'dotenv/config';
 import { DataSource } from 'typeorm';
+import { appEnvs, postgresEnvs } from '../../app/envs';
 
-const isProduction = process.env.NODE_ENV?.toLocaleLowerCase() === 'production';
+const isProduction = appEnvs.ambiente?.toLocaleLowerCase() === 'production';
 const rootDir = isProduction ? 'dist' : 'src';
 
 export const typeorm = new DataSource({
 	type: 'postgres',
-	url: process.env.DATABASE_URL,
+	url: postgresEnvs.url,
 	synchronize: false,
 	logging: false,
 	ssl: {

@@ -1,5 +1,5 @@
-import { UsuarioJSON } from '../../models';
-import { UsuariosRepository } from '../../repositories';
+import { UsuarioJSON } from '../../../models';
+import { UsuariosRepository } from '../repositories';
 
 export type CadastrarLogarUsuarioDTO = {
 	email: string;

@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import { appEnvs } from '../app/envs';
 import { criaServidor } from './config';
 import { DatabaseConnection } from './database';
 
@@ -8,9 +8,9 @@ Promise.all([DatabaseConnection.connect()])
 		const app = criaServidor();
 
 		// START DO SERVER
-		app.listen(process.env.PORT, () => console.log(`Servidor rodando na porta ${process.env.PORT} 🚀`));
+		app.listen(appEnvs.porta, () => console.log(`Servidor rodando na porta ${appEnvs.porta} 🚀`));
 	})
 	.catch((err) => {
-		// executa aqui se estourar algum erro nas promises (conexão rehjeitada)
+		// executa aqui se estourar algum erro nas promises (conexão rejeitada)
 		console.log(err);
 	});

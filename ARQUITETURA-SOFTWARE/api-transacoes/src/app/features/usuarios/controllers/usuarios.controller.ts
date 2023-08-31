@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CadastrarUsuario, LogarUsuario } from '../../usecases';
+import { CadastrarUsuario, LogarUsuario } from '../usecases';
 
 export class UsuariosController {
 	public static async cadastrar(req: Request, res: Response) {

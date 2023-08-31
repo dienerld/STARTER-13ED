@@ -10,7 +10,8 @@
 		"dev": "ts-node-dev --respawn --transpile-only ./src/main/server.ts",
 		"dev:db": "ts-node-dev --respawn --transpile-only ./src/database/test-connection-db.ts",
 		"migration:create": "yarn typeorm migration:create ./src/database/migrations/NomeMigration",
-		"migration:run": "yarn typeorm-ts-node-commonjs migration:run -d src/database/typeorm.ts"
+		"typeorm": "typeorm-ts-node-commonjs",
+		"migration:run": "yarn typeorm migration:run -- -d src/main/config/database.config.ts"
 	},
 	"keywords": [],
 	"author": "",

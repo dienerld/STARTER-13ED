@@ -1,5 +1,5 @@
-import { CadastrarLogarUsuarioDTO, RetornoCadastroLoginUsuario } from '..';
-import { UsuariosRepository } from '../../repositories';
+import { CadastrarLogarUsuarioDTO, RetornoCadastroLoginUsuario } from '.';
+import { UsuariosRepository } from '../repositories';
 
 export class LogarUsuario {
 	public async execute(dadosUsuario: CadastrarLogarUsuarioDTO): Promise<RetornoCadastroLoginUsuario> {
