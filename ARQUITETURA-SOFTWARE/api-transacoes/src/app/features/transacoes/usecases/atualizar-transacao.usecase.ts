@@ -1,6 +1,7 @@
-import { RetornoTransacoes } from '..';
-import { TipoTransacao } from '../../models';
-import { ETipo, TransacoesRepository, UsuariosRepository } from '../../repositories';
+import { TipoTransacao } from '../../../models';
+import { UsuariosRepository } from '../../usuarios/repositories';
+import { ETipo, TransacoesRepository } from '../repositories';
+import { RetornoTransacoes } from './cadastrar-transacao.usecase';
 
 type AtualizarTransacaoDTO = {
 	idUsuario: string;

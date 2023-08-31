@@ -1,17 +1,10 @@
 import { Request, Response } from 'express';
-import { TipoTransacao } from '../../models';
-import {
-	AtualizarTransacao,
-	CadastrarTransacao,
-	DeletarTransacao,
-	ListarPorID,
-	ListarTransacoes,
-} from '../../usecases';
+import { TipoTransacao } from '../../../models';
+import { AtualizarTransacao, CadastrarTransacao, DeletarTransacao, ListarPorID, ListarTransacoes } from '../usecases';
 
 export class TransacaoController {
 	public static async cadastrar(req: Request, res: Response) {
-		const { idUsuario } = req.params;
-		const { valor, tipo } = req.body;
+		const { valor, tipo, idUsuario } = req.body;
 
 		// chamar as regras de negocio
 		const usecase = new CadastrarTransacao();
@@ -26,7 +19,7 @@ export class TransacaoController {
 
 	public static async listarTodas(req: Request, res: Response) {
 		const { tipo } = req.query;
-		const { idUsuario } = req.params;
+		const { idUsuario } = req.body;
 
 		// regra de negocio
 		const usecase = new ListarTransacoes();
@@ -43,7 +36,8 @@ export class TransacaoController {
 	}
 
 	public static async listarPorID(req: Request, res: Response) {
-		const { idUsuario, idTransacao } = req.params;
+		const { idUsuario } = req.body;
+		const { idTransacao } = req.params;
 
 		// regra de negocio
 		const usecase = new ListarPorID();
@@ -60,8 +54,8 @@ export class TransacaoController {
 	}
 
 	public static async atualizar(req: Request, res: Response) {
-		const { idUsuario, idTransacao } = req.params;
-		const { tipo, valor, criadoEm } = req.body;
+		const { idTransacao } = req.params;
+		const { tipo, valor, criadoEm, idUsuario } = req.body;
 
 		// regra de negocio
 		const usecase = new AtualizarTransacao();
@@ -79,7 +73,8 @@ export class TransacaoController {
 	}
 
 	public static async deletar(req: Request, res: Response) {
-		const { idUsuario, idTransacao } = req.params;
+		const { idUsuario } = req.body;
+		const { idTransacao } = req.params;
 
 		// regra de negocio
 		const usecase = new DeletarTransacao();

@@ -1,5 +1,6 @@
-import { TipoTransacao, TransacaoJSON } from '../../models';
-import { TransacoesRepository, UsuariosRepository } from '../../repositories';
+import { TipoTransacao, TransacaoJSON } from '../../../models';
+import { UsuariosRepository } from '../../usuarios/repositories';
+import { TransacoesRepository } from '../repositories';
 
 type CadastrarTransacaoDTO = {
 	idUsuario: string;

@@ -1,4 +1,5 @@
 import { Express, Request, Response } from 'express';
+import rotasTransacao from '../../app/features/transacoes/transacoes.routes';
 import rotasUsuario from '../../app/features/usuarios/usuarios.routes';
 
 export function rotasApp(app: Express) {
@@ -7,5 +8,5 @@ export function rotasApp(app: Express) {
 	});
 
 	app.use('/usuarios', rotasUsuario);
-	// app.use('/transacoes');
+	app.use('/transacoes', rotasTransacao);
 }

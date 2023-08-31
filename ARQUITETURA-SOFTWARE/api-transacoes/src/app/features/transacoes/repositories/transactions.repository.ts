@@ -1,8 +1,8 @@
 import { Between, FindOptionsWhere, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
-import { pgHelper } from '../../database';
-import { TransacaoEntity } from '../../database/entities/transacao.entity';
-import { TipoTransacao, Transacao, Usuario } from '../../models';
+import { TipoTransacao, Transacao, Usuario } from '../../../models';
 
+import { DatabaseConnection } from '../../../../main/database';
+import { TransacaoEntity } from '../../../shared/database/entities';
 type CadastrarDTO = {
 	idUsuario: string;
 	valor: number;
@@ -39,9 +39,9 @@ interface DadosDBTransacao {
 }
 
 export class TransacoesRepository {
-	constructor(private _manager = pgHelper.client.manager) {}
+	private _manager = DatabaseConnection.connection.manager;
 
-	public async cadastrar(dados: CadastrarDTO): Promise<void> {
+	public async cadastrar(dados: CadastrarDTO): Promise<Transacao> {
 		const { valor, tipo, idUsuario } = dados;
 
 		const transacaoEntity = this._manager.create(TransacaoEntity, {
@@ -52,7 +52,7 @@ export class TransacoesRepository {
 
 		const novaTransacao = await this._manager.save(transacaoEntity);
 
-		// return this.entityToModel(ultimInserido);
+		return (await this.buscarPorID(idUsuario, novaTransacao.id)) as Transacao;
 	}
 
 	public async calcularSaldo(idUsuario: string): Promise<number> {
@@ -130,11 +130,7 @@ export class TransacoesRepository {
 	}
 
 	public async deletarTransacao(idTransacao: string): Promise<void> {
-		await this._manager.delete(TransacaoEntity, {
-			where: {
-				id: idTransacao,
-			},
-		});
+		await this._manager.delete(TransacaoEntity, { id: idTransacao });
 	}
 
 	// TRANSFORMA RESULTADO DA BUSCA EM UMA INSTANCIA DA MODEL
