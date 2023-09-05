@@ -8,8 +8,8 @@ export default new DataSource({
 	type: 'postgres',
 	url: appEnvs.dbURL,
 	schema: 'public',
-	entities: [rootDir + ''],
-	migrations: [rootDir + ''],
+	entities: [rootDir + '/app/shared/entities/**/*'],
+	migrations: [rootDir + '/app/shared/migrations/**/*'],
 	synchronize: false,
 	ssl: {
 		rejectUnauthorized: false,

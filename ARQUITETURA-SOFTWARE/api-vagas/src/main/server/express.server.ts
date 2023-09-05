@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { appEnvs } from '../../app/envs';
 import { createServer } from '../config/express.config';
+import { makeRoutes } from './app.routes';
 
 export function runServer() {
 	const app = createServer();
@@ -13,8 +14,7 @@ export function runServer() {
 	});
 
 	// CHAMADA PARA AS RODAS DE FUNCIONALIDADES
-	// ROTAS USUARIOS
-	// ROTAS VAGAS
+	makeRoutes(app);
 
 	app.listen(appEnvs.porta, () => console.log('API esta rodando na porta ' + appEnvs.porta));
 }

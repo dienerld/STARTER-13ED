@@ -12,13 +12,16 @@ Módulo - Arquitetura de Software
 - a. PORT: valor numérico para a porta que o express irá rodar.
 - b. DB_URL: string com a URL do banco de dados.
 
+3. Rodar as migrations com o comando `yarn migration:run`
+4. Rodar o servidor com o comando `yarn dev`
+
 ## Dev guideline
 
-O projeto será baseado em features, sendo que cada feature deve possuir uma arquitetura bem definida. A pasta `src/main` possuirá arquivos de configuração do projeto, enquanto o diretório `src/app` conterá os arquivos referentes a aplicação em si, como as features, os models e os helpers.
+O projeto é baseado em features, sendo que cada feature possui uma arquitetura bem definida. A pasta `src/main` possui arquivos de configuração do projeto, enquanto o diretório `src/app` contém os arquivos referentes a aplicação em si, como as features, os models e os helpers.
 
 ### Features
 
-Para cada feature deve ser criada o diretório: `src/app/features/<feature>`, sendo `<feature>` o nome da funcionalidade que será desenvolvida. Exemplo: para a feature User, criar o diretório `src/app/features/user`.
+Para cada feature deve ser criado o diretório: `src/app/features/<feature>`, sendo `<feature>` o nome da funcionalidade que será desenvolvida. Exemplo: para a feature User, criar o diretório `src/app/features/user`.
 
 Cada feature é composta pelos seguintes componentes:
 
@@ -27,7 +30,7 @@ Cada feature é composta pelos seguintes componentes:
 3. **Repository**: camada de operações da feature com o banco de dados. Devem ser escritos na pasta `src/app/features/<feature>/repository`. Os métodos no repository seguem as seguintes regras:
 
 - 3.1. O tipo de entrada de dados deve ser: (a) um model; ou (b) um DTO.
-- 3.2 O tipo de retorno deve ser: (a) um model (usar o método `.create()` do model); ou (b) um tipo primitivo (p.ex. boolean)).
+- 3.2 O tipo de retorno deve ser: (a) um model ou (b) um tipo primitivo (p.ex. boolean).
 - 3.3 O tipo de retorno NUNCA deve ser uma Entity.
 
 4. **Usecase**: camada de regras de negócio da feature. Devem ser escritos na pasta `src/app/features/<feature>/usecases`. Os usecases devem seguir as regras:
