@@ -1,8 +1,6 @@
-import { randomUUID } from "crypto";
-
 export abstract class BaseModel {
-	protected createdAt: Date = new Date();
-	protected id: string = randomUUID();
+	protected createdAt: Date;
+	protected id: string;
 
 	public abstract toJSON(): any;
 }

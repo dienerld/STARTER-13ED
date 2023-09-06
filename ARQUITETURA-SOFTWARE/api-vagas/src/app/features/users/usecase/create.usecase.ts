@@ -1,10 +1,18 @@
-import { User } from "../../../models/user.model";
 import { CreateUserDTO } from "../DTO";
+import { UsersRepository } from "../repository/users.repository";
 
 export class CreateUserUsecase {
-	async execute({ name, password, role, username }: CreateUserDTO) {
-		const newUser = new User(username, name, password, role);
+	async execute(data: CreateUserDTO) {
+		const repository = new UsersRepository();
 
-		return newUser.toJSON();
+		const userExists = await repository.findByUsername(data.username);
+
+		if (userExists) {
+			return new Error("Usuário já cadastrado");
+		}
+
+		const newUser = await repository.save(data);
+
+		return newUser;
 	}
 }

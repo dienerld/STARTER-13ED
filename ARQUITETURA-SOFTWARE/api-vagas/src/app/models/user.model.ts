@@ -7,8 +7,15 @@ export class User extends BaseModel {
 	#password: string;
 	#role: Profile;
 
-	constructor(username: string, name: string, password: string, role: Profile) {
+	constructor(
+		id: string,
+		username: string,
+		name: string,
+		password: string,
+		role: Profile
+	) {
 		super();
+		this.id = id;
 		this.#username = username;
 		this.#name = name;
 		this.#password = password;
@@ -20,6 +27,16 @@ export class User extends BaseModel {
 			id: this.id,
 			username: this.#username,
 			role: this.#role,
+			createdAt: this.createdAt,
+		};
+	}
+
+	public toJSONWithPassword() {
+		return {
+			id: this.id,
+			username: this.#username,
+			role: this.#role,
+			password: this.#password,
 			createdAt: this.createdAt,
 		};
 	}
