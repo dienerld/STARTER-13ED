@@ -1,15 +1,16 @@
-import { DataSource } from 'typeorm';
-import { appEnvs } from '../../app/envs';
+import "dotenv/config";
+import { DataSource } from "typeorm";
+import { appEnvs } from "../../app/envs";
 
-const ehProducao = appEnvs.ambiente === 'producao';
-const rootDir = ehProducao ? 'dist' : 'src';
+const isProd = appEnvs.enviroment === "production";
+const rootDir = isProd ? "dist" : "src";
 
 export default new DataSource({
-	type: 'postgres',
+	type: "postgres",
 	url: appEnvs.dbURL,
-	schema: 'public',
-	entities: [rootDir + '/app/shared/entities/**/*'],
-	migrations: [rootDir + '/app/shared/migrations/**/*'],
+	schema: "public",
+	entities: [rootDir + "/app/shared/entities/**/*"],
+	migrations: [rootDir + "/app/shared/migrations/**/*"],
 	synchronize: false,
 	ssl: {
 		rejectUnauthorized: false,

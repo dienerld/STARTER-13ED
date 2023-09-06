@@ -1,6 +1,6 @@
-import { Express } from 'express';
-import usuariosRoutes from '../../app/feature/usuarios/usuarios.routes';
+import { Express } from "express";
+import usersRoutes from "../../app/features/users/users.routes";
 
 export const makeRoutes = (app: Express) => {
-	app.use('/usuarios', usuariosRoutes());
+	app.use("/users", usersRoutes());
 };
