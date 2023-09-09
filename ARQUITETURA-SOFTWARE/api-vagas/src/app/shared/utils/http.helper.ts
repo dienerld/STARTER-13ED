@@ -1,26 +1,17 @@
 import { Response } from 'express';
+import { ResultDTO } from './result.helper';
 
 class HttpHelper {
-	public success(res: Response, data: any, message?: string, code?: number) {
-		return res.status(code ?? 200).send({
-			ok: true,
-			data,
-			message,
-		});
+	public success(res: Response, result: ResultDTO) {
+		return res.status(result.code ?? 200).send(result);
 	}
 
-	public serverError(res: Response, message?: string, code?: number) {
-		return res.status(code ?? 500).send({
-			ok: false,
-			message,
-		});
+	public serverError(res: Response, result: ResultDTO) {
+		return res.status(result.code ?? 500).send(result);
 	}
 
-	public badRequestError(res: Response, message?: string, code?: number) {
-		return res.status(code ?? 400).send({
-			ok: false,
-			message,
-		});
+	public badRequestError(res: Response, result: ResultDTO) {
+		return res.status(result.code ?? 400).send(result);
 	}
 }
 

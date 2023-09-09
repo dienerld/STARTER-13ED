@@ -1,0 +1,22 @@
+
+POST http://localhost:8080/users HTTP/1.1
+content-type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU4Mjc2MGZjLTZhYWYtNGQ4Ni1hNjZmLWRhM2I0ZDhiYjRiOSIsInVzZXJuYW1lIjoiYWRtaW4xQHRlc3RlLmNvbSIsInByb2ZpbGUiOiJBRE1JTiIsImNvbXBhbnkiOm51bGwsImlhdCI6MTY5NDIyMjUyMiwiZXhwIjoxNjk0MjI2MTIyfQ.wS8g8vaEQPzm84AmIKiKdtU8xAgTRJEei_T9NirOWy4
+
+
+# ADMIN
+# {
+#     "name": "Admin First",
+#     "username": "admin1@teste.com",
+#     "password": "senha1234",
+#     "profile": "ADMIN"
+# }
+
+# RECRUTADOR
+{
+    "name": "Recrutador 1",
+    "username": "recrutador@growdev.com.br",
+    "password": "123456",
+    "profile": "RECRUITER",
+    "company": "Growdev"
+}
