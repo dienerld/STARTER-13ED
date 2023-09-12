@@ -1,7 +1,9 @@
-import { TipoTransacao } from '../../../models';
+import { TipoTransacao, Transacao, TransacaoJSON } from '../../../models';
+import { CacheRepository } from '../../../shared/database/repositories';
 import { UsuariosRepository } from '../../usuarios/repositories';
 import { TransacoesRepository } from '../repositories';
 import { RetornoTransacoes } from './cadastrar-transacao.usecase';
+import { CalcularSaldoUsecase } from './calcular-saldo.usecase';
 
 type ListarTransacoesDTO = {
 	idUsuario: string;
@@ -14,6 +16,7 @@ export class ListarTransacoes {
 
 		const repositoryUsuario = new UsuariosRepository();
 		const repositoryTransacoes = new TransacoesRepository();
+		const cacheRepository = new CacheRepository();
 
 		const usuarioEncontrado = await repositoryUsuario.buscaUsuarioPorID(idUsuario);
 
@@ -27,18 +30,28 @@ export class ListarTransacoes {
 			};
 		}
 
-		const transacoes = await repositoryTransacoes.listarTransacoesDeUmUsuario(idUsuario, {
-			tipo,
-		});
+		// ANTES DE BUSCAR NA BASE DE DADOS, BUSCAMOS NO CACHE
+		const transacoesCache = await cacheRepository.get<TransacaoJSON[]>(`transacoes-usuario-${idUsuario}`);
+		let transacoes: TransacaoJSON[] = [];
 
-		const saldo = await repositoryTransacoes.calcularSaldo(idUsuario);
+		if (!transacoesCache) {
+			const transacoesPrincipal = await repositoryTransacoes.listarTransacoesDeUmUsuario(idUsuario);
+
+			await cacheRepository.set<Transacao[]>(`transacoes-usuario-${idUsuario}`, transacoesPrincipal);
+
+			transacoes = transacoesPrincipal.map((t) => t.toJSON());
+		} else {
+			transacoes = transacoesCache;
+		}
+
+		const saldo = new CalcularSaldoUsecase().execute(transacoes);
 
 		return {
 			sucesso: true,
 			mensagem: 'Transações do usuário listadas com sucesso',
 			dados: {
 				saldo,
-				transacoes: transacoes.map((t) => t.toJSON()),
+				transacoes,
 			},
 		};
 	}
