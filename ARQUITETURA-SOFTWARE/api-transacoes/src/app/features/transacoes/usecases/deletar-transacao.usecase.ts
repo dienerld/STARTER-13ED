@@ -1,3 +1,4 @@
+import { CacheRepository } from '../../../shared/database/repositories';
 import { UsuariosRepository } from '../../usuarios/repositories';
 import { TransacoesRepository } from '../repositories';
 import { RetornoTransacoes } from './cadastrar-transacao.usecase';
@@ -13,6 +14,7 @@ export class DeletarTransacao {
 
 		const repositoryUsuario = new UsuariosRepository();
 		const repositoryTransacao = new TransacoesRepository();
+		const cacheRepository = new CacheRepository();
 
 		const usuarioEncontrado = await repositoryUsuario.buscaUsuarioPorID(idUsuario);
 
@@ -39,6 +41,7 @@ export class DeletarTransacao {
 		}
 
 		await repositoryTransacao.deletarTransacao(idTransacao);
+		await cacheRepository.delete(`transacoes-usuario-${idUsuario}`);
 
 		const saldo = await repositoryTransacao.calcularSaldo(idUsuario);
 

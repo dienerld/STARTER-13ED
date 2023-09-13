@@ -1,4 +1,5 @@
 import { TipoTransacao } from '../../../models';
+import { CacheRepository } from '../../../shared/database/repositories';
 import { UsuariosRepository } from '../../usuarios/repositories';
 import { ETipo, TransacoesRepository } from '../repositories';
 import { RetornoTransacoes } from './cadastrar-transacao.usecase';
@@ -19,6 +20,7 @@ export class AtualizarTransacao {
 
 		const repositoryUsuario = new UsuariosRepository();
 		const repositoryTransacao = new TransacoesRepository();
+		const cacheRepository = new CacheRepository();
 
 		const usuarioEncontrado = await repositoryUsuario.buscaUsuarioPorID(idUsuario);
 
@@ -49,6 +51,7 @@ export class AtualizarTransacao {
 			tipo: novosDados.tipo,
 			criadoEm: novosDados.criadoEm,
 		});
+		await cacheRepository.delete(`transacoes-usuario-${idUsuario}`);
 
 		if (!atualizada) {
 			return {

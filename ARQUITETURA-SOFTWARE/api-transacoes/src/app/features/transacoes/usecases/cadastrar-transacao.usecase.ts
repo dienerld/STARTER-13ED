@@ -1,4 +1,5 @@
 import { TipoTransacao, TransacaoJSON } from '../../../models';
+import { CacheRepository } from '../../../shared/database/repositories';
 import { UsuariosRepository } from '../../usuarios/repositories';
 import { TransacoesRepository } from '../repositories';
 
@@ -22,6 +23,8 @@ export class CadastrarTransacao {
 	public async execute(dados: CadastrarTransacaoDTO): Promise<RetornoTransacoes> {
 		// para criar uma transação precisa ter um usuario válido
 		const repositoryUsuario = new UsuariosRepository();
+		const cacheRepository = new CacheRepository();
+
 		const usuarioEncontrado = await repositoryUsuario.buscaUsuarioPorID(dados.idUsuario);
 
 		if (!usuarioEncontrado) {
@@ -40,6 +43,8 @@ export class CadastrarTransacao {
 			tipo: dados.tipo,
 			valor: dados.valor,
 		});
+
+		await cacheRepository.delete(`transacoes-usuario-${dados.idUsuario}`);
 
 		const somaTransacoes = await repositoryTransacoes.calcularSaldo(dados.idUsuario);
 		console.log(somaTransacoes);
