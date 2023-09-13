@@ -1,0 +1,9 @@
+
+POST http://localhost:8080/transacoes HTTP/1.1
+content-type: application/json
+
+{
+    "idUsuario": "ddbe4da2-ad75-4f42-b95d-cc3f941865eb",
+    "valor": 600,
+    "tipo": "entrada"
+}
