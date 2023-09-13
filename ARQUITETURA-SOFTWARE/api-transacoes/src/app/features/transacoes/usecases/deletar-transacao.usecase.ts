@@ -42,6 +42,7 @@ export class DeletarTransacao {
 
 		await repositoryTransacao.deletarTransacao(idTransacao);
 		await cacheRepository.delete(`transacoes-usuario-${idUsuario}`);
+		await cacheRepository.delete(`transacao-${idTransacao}`);
 
 		const saldo = await repositoryTransacao.calcularSaldo(idUsuario);
 

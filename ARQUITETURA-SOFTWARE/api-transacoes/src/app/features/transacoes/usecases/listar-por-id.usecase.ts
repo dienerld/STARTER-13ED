@@ -1,3 +1,5 @@
+import { TransacaoJSON } from '../../../models';
+import { CacheRepository } from '../../../shared/database/repositories';
 import { UsuariosRepository } from '../../usuarios/repositories';
 import { TransacoesRepository } from '../repositories';
 import { RetornoTransacoes } from './cadastrar-transacao.usecase';
@@ -13,6 +15,7 @@ export class ListarPorID {
 
 		const repositoryUsuario = new UsuariosRepository();
 		const repositoryTransacao = new TransacoesRepository();
+		const cacheRepository = new CacheRepository();
 
 		const usuarioEncontrado = await repositoryUsuario.buscaUsuarioPorID(idUsuario);
 
@@ -26,26 +29,40 @@ export class ListarPorID {
 			};
 		}
 
-		const transacao = await repositoryTransacao.buscarPorID(idUsuario, idTransacao);
+		const saldo = await repositoryTransacao.calcularSaldo(idUsuario);
+		const trancacaoCache = await cacheRepository.get<TransacaoJSON>(`transacao-${idTransacao}`);
 
-		if (!transacao) {
+		if (!trancacaoCache) {
+			const transacao = await repositoryTransacao.buscarPorID(idUsuario, idTransacao);
+
+			if (!transacao) {
+				return {
+					sucesso: false,
+					mensagem: 'Transação não encontrada.',
+					dados: {
+						saldo: 0,
+					},
+				};
+			}
+
+			await cacheRepository.set<TransacaoJSON>(`transacao-${idTransacao}`, transacao.toJSON());
+
 			return {
-				sucesso: false,
-				mensagem: 'Transação não encontrada.',
+				sucesso: true,
+				mensagem: 'Transação buscada com sucesso',
 				dados: {
-					saldo: 0,
+					saldo,
+					transacao: transacao.toJSON(),
 				},
 			};
 		}
 
-		const saldo = await repositoryTransacao.calcularSaldo(idUsuario);
-
 		return {
 			sucesso: true,
-			mensagem: 'Transação buscada com sucesso',
+			mensagem: 'Transação em cache buscada com sucesso',
 			dados: {
 				saldo,
-				transacao: transacao.toJSON(),
+				transacao: trancacaoCache,
 			},
 		};
 	}

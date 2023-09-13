@@ -45,6 +45,7 @@ export class CadastrarTransacao {
 		});
 
 		await cacheRepository.delete(`transacoes-usuario-${dados.idUsuario}`);
+		await cacheRepository.delete(`transacao-${transacaoCriada.toJSON().id}`);
 
 		const somaTransacoes = await repositoryTransacoes.calcularSaldo(dados.idUsuario);
 		console.log(somaTransacoes);

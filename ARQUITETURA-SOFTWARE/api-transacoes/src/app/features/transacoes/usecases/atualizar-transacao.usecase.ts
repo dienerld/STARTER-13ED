@@ -52,6 +52,7 @@ export class AtualizarTransacao {
 			criadoEm: novosDados.criadoEm,
 		});
 		await cacheRepository.delete(`transacoes-usuario-${idUsuario}`);
+		await cacheRepository.delete(`transacao-${idTransacao}`);
 
 		if (!atualizada) {
 			return {
