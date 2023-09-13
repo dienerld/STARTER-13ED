@@ -1,4 +1,4 @@
-import { TipoTransacao, Transacao, TransacaoJSON } from '../../../models';
+import { TipoTransacao, TransacaoJSON } from '../../../models';
 import { CacheRepository } from '../../../shared/database/repositories';
 import { UsuariosRepository } from '../../usuarios/repositories';
 import { TransacoesRepository } from '../repositories';
@@ -36,15 +36,18 @@ export class ListarTransacoes {
 
 		if (!transacoesCache) {
 			const transacoesPrincipal = await repositoryTransacoes.listarTransacoesDeUmUsuario(idUsuario);
-
-			await cacheRepository.set<Transacao[]>(`transacoes-usuario-${idUsuario}`, transacoesPrincipal);
-
 			transacoes = transacoesPrincipal.map((t) => t.toJSON());
+
+			await cacheRepository.set<TransacaoJSON[]>(`transacoes-usuario-${idUsuario}`, transacoes);
 		} else {
 			transacoes = transacoesCache;
 		}
 
 		const saldo = new CalcularSaldoUsecase().execute(transacoes);
+
+		if (tipo) {
+			transacoes = transacoes.filter((t) => t.tipo === tipo);
+		}
 
 		return {
 			sucesso: true,
