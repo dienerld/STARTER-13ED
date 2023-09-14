@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { auth, onlyAdmin } from "../../shared/middlewares";
+import { auth, onlyAdmin, onlyCandidate } from "../../shared/middlewares";
 import { UserController } from "./controllers";
 import {
   cleanInfo,
@@ -25,6 +25,12 @@ export default () => {
     "/candidates",
     [fieldsValidator, cleanInfo, createCandidateValidator],
     UserController.createCadidate
+  );
+
+  router.get(
+    "/candidates/applications",
+    [auth, onlyCandidate],
+    UserController.listApplications
   );
 
   // Login de usuários - Requisito 2
