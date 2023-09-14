@@ -16,6 +16,14 @@ export class JobsRepository {
 		return this.entityToModel(createdJob);
 	}
 
+	async getJobByID(idJob: string): Promise<Job | undefined> {
+		const job = await this._manager.findOneBy(JobEntity, { id: idJob });
+
+		if (!job) return undefined;
+
+		return this.entityToModel(job);
+	}
+
 	private entityToModel({
 		id,
 		description,

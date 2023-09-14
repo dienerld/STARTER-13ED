@@ -14,7 +14,11 @@ export default () => {
 	router.post('/jobs', [auth, onlyRecruiter, createJobValidator], JobsController.createJob);
 
 	// Aplicação de uma vaga pelo candidato - Requisito 6
-	router.post('/jobs/:idJob/apply', [auth, onlyCandidate]);
+	router.post('/jobs/:idJob/apply', [auth, onlyCandidate], JobsController.applyJob);
 
 	return router;
 };
+
+// 1 - Repository - OK
+// 2 - Usecase
+// 3 - Controller
