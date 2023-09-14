@@ -1,8 +1,1 @@
-export interface CreateJobDTO {
-	description: string;
-	companyName: string;
-	limitDate: Date;
-	isOpen: boolean;
-	idRecruiter: string;
-	maxCandidate: number;
-}
+export * from './create-job.dto';

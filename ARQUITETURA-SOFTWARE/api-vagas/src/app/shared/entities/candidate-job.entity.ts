@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity, JobEntity, UserEntity } from '.';
 import { CandidateJobStatus } from '../enums';
 
@@ -14,8 +14,10 @@ export class CandidateJobEntity extends BaseEntity {
 	public status: CandidateJobStatus;
 
 	@ManyToOne(() => JobEntity, (entity) => entity.candidatesJob)
+	@JoinColumn({ name: 'id_job', referencedColumnName: 'id' })
 	public job: JobEntity;
 
 	@ManyToOne(() => UserEntity, (entity) => entity.candidatesJob)
+	@JoinColumn({ name: 'id_candidate', referencedColumnName: 'id' })
 	public candidate: UserEntity;
 }

@@ -4,6 +4,6 @@ content-type: application/json
 
 
 {
-    "username": "admin1@teste.com",
-    "password": "senha1234"
+    "username": "recrutador@growdev.com.br",
+    "password": "123456"
 }
