@@ -1,0 +1,10 @@
+
+PUT http://localhost:8080/transacoes/a858a5f6-ae23-4e0e-b445-a19269f11a9e HTTP/1.1
+content-type: application/json
+
+{
+    "idUsuario": "ddbe4da2-ad75-4f42-b95d-cc3f941865eb",
+    "valor": 600,
+    "tipo": "saida",
+    "criadoEm": "2023-09-10"
+}

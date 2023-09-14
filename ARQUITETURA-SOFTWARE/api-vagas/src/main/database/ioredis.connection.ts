@@ -6,7 +6,7 @@ export class RedisConnection {
 
   public static get connection(): Redis {
     if (!this._connection) {
-      throw new Error("Não existe conexão com o banco estabelecida");
+      throw new Error("Conexão com a base de dados de cache não estabelecida!");
     }
 
     return this._connection;
@@ -15,7 +15,7 @@ export class RedisConnection {
   public static async connect() {
     if (!this._connection) {
       this._connection = redis;
-      console.log("Conexão com o Redis foi inicializada");
+      console.log("Base de dados de cache conectada!");
     }
   }
 }

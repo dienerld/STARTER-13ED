@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Profile } from '../../../shared/enums';
 import { httpHelper } from '../../../shared/utils';
 import { Result } from '../../../shared/utils/result.helper';
 import { CreateUserDTO } from '../DTO';
@@ -60,10 +61,11 @@ export class UserController {
 		}
 	}
 
-	static async list(_: Request, res: Response) {
+	static async list(req: Request, res: Response) {
 		try {
+			const { profile } = req.query;
 			const usecase = new ListUsersUsecase();
-			const result = await usecase.execute();
+			const result = await usecase.execute(profile as keyof typeof Profile);
 
 			return httpHelper.success(res, result);
 		} catch (err: any) {

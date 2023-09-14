@@ -1,0 +1,8 @@
+
+GET http://localhost:8080/transacoes HTTP/1.1
+# ?tipo=saida&valor=500&valorMin=200
+content-type: application/json
+
+{
+   "idUsuario": "e3103e5b-0fba-4f1a-8fe0-2dc6736c9e53"
+}

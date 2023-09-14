@@ -1,9 +1,21 @@
 
-POST http://localhost:8080/login HTTP/1.1
+POST http://localhost:8081/login HTTP/1.1
 content-type: application/json
 
-
+# RECRUTADOR
 {
     "username": "recrutador@growdev.com.br",
     "password": "123456"
 }
+
+# ADMIN
+# {
+#     "username": "admin1@teste.com",
+#     "password": "senha1234"
+# }
+
+# CANDIDATO
+# {
+#     "username": "joao@teste.com",
+#     "password": "senha1234"
+# }

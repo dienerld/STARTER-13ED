@@ -1,4 +1,4 @@
 import { Redis } from "ioredis";
-import { appEnvs } from "../../app/envs";
+import { appEnvs } from "../../app/envs/app.env";
 
-export const redis = new Redis(appEnvs.redisURL);
+export const redis = new Redis(appEnvs.redisUrl);

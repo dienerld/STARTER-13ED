@@ -1,0 +1,7 @@
+
+DELETE http://localhost:8080/transacoes/0d974c36-136c-45c2-a7d2-10801819aa21 HTTP/1.1
+content-type: application/json
+
+{
+   "idUsuario": "e3103e5b-0fba-4f1a-8fe0-2dc6736c9e53"
+}

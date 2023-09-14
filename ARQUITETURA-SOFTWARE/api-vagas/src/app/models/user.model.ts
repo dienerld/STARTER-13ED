@@ -1,6 +1,14 @@
 import { Profile } from '../shared/enums';
 import { BaseModel } from './base.model';
 
+export interface UserJSON {
+	id: string;
+	username: string;
+	profile: Profile;
+	company?: string;
+	createdAt: Date;
+}
+
 export class User extends BaseModel {
 	#username: string;
 	#name: string;
@@ -18,7 +26,7 @@ export class User extends BaseModel {
 		this.#company = company;
 	}
 
-	public toJSON() {
+	public toJSON(): UserJSON {
 		return {
 			id: this.id,
 			username: this.#username,
