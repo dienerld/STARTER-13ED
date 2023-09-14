@@ -1,8 +1,9 @@
 import { Result, ResultDTO } from '../../../shared/utils/result.helper';
+import { ApplyJobDTO } from '../DTO';
 import { CandidateJobsRepository, JobsRepository } from '../repository';
 
 export class ApplyJobUsecase {
-	async execute(idJob: string, idCandidate: string): Promise<ResultDTO> {
+	async execute({ idJob, idCandidate }: ApplyJobDTO): Promise<ResultDTO> {
 		const jobRepo = new JobsRepository();
 		const candidateJobRepo = new CandidateJobsRepository();
 
@@ -15,7 +16,7 @@ export class ApplyJobUsecase {
 		const jobJSON = job.toJSON();
 
 		//- A data limite da vaga já foi alcançada
-		if (jobJSON.limitDate.getTime() < new Date().getTime()) {
+		if (new Date().getTime() > jobJSON.limitDate.getTime()) {
 			return Result.error(400, 'Max date is overdue.');
 		}
 
@@ -26,14 +27,14 @@ export class ApplyJobUsecase {
 
 		//- A vaga já está lotada de candidatos, quando tiver número máximo definido
 		if (jobJSON.maxCandidates) {
-			const total = await candidateJobRepo.getTotal(idJob);
+			const total = await candidateJobRepo.getTotalApplies(idJob);
 
 			if (total >= jobJSON.maxCandidates) {
 				return Result.error(400, 'Job with maximum limit of candidates.');
 			}
 		}
 
-		const isApply = await candidateJobRepo.verifyApplyCandidateByID(idCandidate, idJob);
+		const isApply = await candidateJobRepo.verifyApplyCandidateByID({ idCandidate, idJob });
 
 		// - O candidato já se aplicou a mesma vaga
 		if (isApply) {

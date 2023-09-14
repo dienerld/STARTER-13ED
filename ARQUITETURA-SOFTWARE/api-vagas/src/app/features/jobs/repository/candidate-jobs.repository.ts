@@ -1,15 +1,12 @@
 import { DatabaseConnection } from '../../../../main/database/typeorm.connection';
 import { CandidateJobEntity } from '../../../shared/entities';
 import { CandidateJobStatus } from '../../../shared/enums';
-
-interface ApplyJobDTO {
-	idCandidate: string;
-	idJob: string;
-}
+import { ApplyJobDTO } from '../DTO';
 
 export class CandidateJobsRepository {
 	private _manager = DatabaseConnection.connection.manager;
 
+	// CADASTRAR UMA VAGA
 	async save(data: ApplyJobDTO): Promise<void> {
 		const candidateJobEntity = this._manager.create(CandidateJobEntity, {
 			jobId: data.idJob,
@@ -21,21 +18,19 @@ export class CandidateJobsRepository {
 	}
 
 	// Verificar se o candidato já se aplicou a mesma vaga
-	async verifyApplyCandidateByID(idCandidate: string, idJob: string): Promise<boolean> {
+	async verifyApplyCandidateByID(data: ApplyJobDTO): Promise<boolean> {
 		const candidateJobFound = await this._manager.find(CandidateJobEntity, {
-			where: [
-				{
-					candidateId: idCandidate,
-					jobId: idJob,
-				},
-			],
+			where: {
+				candidateId: data.idCandidate,
+				jobId: data.idJob,
+			},
 		});
 
 		return !!candidateJobFound.length;
 	}
 
-	// get total candidatos
-	async getTotal(idJob: string): Promise<number> {
+	// TOTAL DE CANDIDADOS APLICADOS À VAGA
+	async getTotalApplies(idJob: string): Promise<number> {
 		const total = await this._manager.count(CandidateJobEntity, {
 			where: {
 				jobId: idJob,

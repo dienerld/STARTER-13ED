@@ -1,15 +1,12 @@
 import { Request, Response } from 'express';
 import { httpHelper } from '../../../shared/utils';
 import { Result } from '../../../shared/utils/result.helper';
-import { ApplyJobUsecase } from '../usecase/apply-job.usecase';
-import { CreateJobUsecase } from '../usecase/create.usecase';
+import { ApplyJobUsecase, CreateJobUsecase } from '../usecase';
 
 export class JobsController {
 	static async createJob(req: Request, res: Response) {
 		const dados = req.body;
 		const { id } = req.user;
-
-		console.log();
 
 		try {
 			const usecase = new CreateJobUsecase();
@@ -30,7 +27,7 @@ export class JobsController {
 
 		try {
 			const usecase = new ApplyJobUsecase();
-			const result = await usecase.execute(idJob, id);
+			const result = await usecase.execute({ idJob, idCandidate: id });
 
 			if (!result.ok) {
 				return httpHelper.badRequestError(res, result);
