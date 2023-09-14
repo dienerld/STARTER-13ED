@@ -1,0 +1,14 @@
+
+POST http://localhost:8081/candidates HTTP/1.1
+content-type: application/json
+
+
+# CANDIDATO
+{
+    "name": "João da Silva",
+    "username": "joao@teste.com",
+    "password": "senha1234",
+    "profile": "CANDIDATE"
+}
+
+

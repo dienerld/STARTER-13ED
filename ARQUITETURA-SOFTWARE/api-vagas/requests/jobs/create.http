@@ -1,12 +1,12 @@
 
 POST http://localhost:8081/jobs HTTP/1.1
 content-type: application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA0MjM3ZmFjLThjMjctNDEyYS1iMWM3LTYzZGYzZjUxZGI5ZSIsInVzZXJuYW1lIjoicmVjcnV0YWRvckBncm93ZGV2LmNvbS5iciIsInByb2ZpbGUiOiJSRUNSVUlURVIiLCJjb21wYW55IjoiR3Jvd2RldiIsImlhdCI6MTY5NDY1MjU1MSwiZXhwIjoxNjk0NjU2MTUxfQ.J0WluU188d2iJdtBENdc0gGKBHJD7wOjXOsKJ18UTKk
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA0MjM3ZmFjLThjMjctNDEyYS1iMWM3LTYzZGYzZjUxZGI5ZSIsInVzZXJuYW1lIjoicmVjcnV0YWRvckBncm93ZGV2LmNvbS5iciIsInByb2ZpbGUiOiJSRUNSVUlURVIiLCJjb21wYW55IjoiR3Jvd2RldiIsImlhdCI6MTY5NDY5MDg0NywiZXhwIjoxNjk0Njk0NDQ3fQ.XmQSPTj4b4LI-2hPHxgnpftMeSlSZvxtVGU7jn2xWF0
 
 {
-    "description": "Dev Senior Full Stack",
+    "description": "Dev Pleno Full Stack",
     "companyName": "Growdev",
     "isOpen": true,
-    "limitDate": "13/09/2023",
-    "maxCandidates": 10
+    "limitDate": "25/09/2023",
+    "maxCandidate": 10
 }

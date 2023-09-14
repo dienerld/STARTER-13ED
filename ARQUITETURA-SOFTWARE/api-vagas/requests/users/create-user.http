@@ -13,10 +13,11 @@ token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA2ZTJjYWNlLTkxNjQtNDY3OC04
 # }
 
 # RECRUTADOR
-{
-    "name": "Recrutador 1",
-    "username": "recrutador@growdev.com.br",
-    "password": "123456",
-    "profile": "RECRUITER",
-    "company": "Growdev"
-}
+# {
+#     "name": "Recrutador 1",
+#     "username": "recrutador@growdev.com.br",
+#     "password": "123456",
+#     "profile": "RECRUITER",
+#     "company": "Growdev"
+# }
+
