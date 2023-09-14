@@ -6,8 +6,8 @@ import { createJobValidator } from './middlewares';
 export default () => {
 	const router = Router();
 
-	router.post('/jobs', [auth, onlyRecruiter, createJobValidator], JobsController.createJob); //Cadastro de vagas pelo recrutador - Requisito 5
-	router.post('/jobs/:idJob/apply', [auth, onlyCandidate], JobsController.applyJob); // Aplicação de uma vaga pelo candidato - Requisito 6
+	router.post('/jobs', [auth, onlyRecruiter, createJobValidator], JobsController.createJob); //Cadastro de vagas pelo recrutador - Requisito 5 ✅
+	router.post('/jobs/:idJob/apply', [auth, onlyCandidate], JobsController.applyJob); // Aplicação de uma vaga pelo candidato - Requisito 6 ✅
 	router.get('/jobs-candidate', [auth, onlyCandidate] /* aqui o controller */); // Listagem de vagas do candidato - Requisito 7
 	router.get('/jobs/:idJob/candidates', [auth, onlyRecruiter] /* aqui o controller */); // Listagem de candidatos de uma vaga - Requisito 8
 	router.get('/jobs-by-recruiter', [auth, onlyRecruiter] /* aqui o controller */); // Listagem de vagas cadastradas e seus candidatos - Requisito 9
