@@ -1,8 +1,8 @@
-import { CacheRepository } from "../../../shared/cache/cache.repository";
-import { Result } from "../../../shared/utils/result.helper";
-import { CandidateJobsRepository } from "../../jobs/repository";
+import { CacheRepository } from '../../../shared/cache/cache.repository';
+import { Result } from '../../../shared/utils/result.helper';
+import { CandidateJobsRepository } from '../repository';
 
-const PREFIX_CACHE = "list-applications";
+const PREFIX_CACHE = 'list-applications';
 
 export class ListApplications {
   async execute(userId: string) {
@@ -15,6 +15,6 @@ export class ListApplications {
       await cacheRepository.set(`${PREFIX_CACHE}-${userId}`, applications);
     }
 
-    return Result.success(200, "Applications OK", applications);
+    return Result.success(200, 'Applications OK', applications);
   }
 }
