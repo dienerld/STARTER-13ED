@@ -16,10 +16,10 @@ const config: Config = {
 	// cacheDirectory: "C:\\Users\\leticia.perez\\AppData\\Local\\Temp\\jest",
 
 	// Automatically clear mock calls, instances, contexts and results before every test
-	clearMocks: true,
+	clearMocks: false,
 
 	// Indicates whether the coverage information should be collected while executing the test
-	collectCoverage: true,
+	collectCoverage: false,
 
 	// An array of glob patterns indicating a set of files for which coverage information should be collected
 	collectCoverageFrom: ['<rootDir>/src/app/**/*.ts'],

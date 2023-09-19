@@ -18,6 +18,7 @@ export class CadastrarUsuario {
 
 		// 1 - verifica se existe um outro usuario com o mesmo email já cadastrado
 		const existe = await repository.verificarSeExisteUsuarioPorEmail(dadosNovoUsuario.email);
+
 		if (existe) {
 			return {
 				sucesso: false,
