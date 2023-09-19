@@ -5,6 +5,7 @@ import { Usuario } from '../../../../../src/app/models';
 import { DatabaseConnection, RedisConnection } from '../../../../../src/main/database';
 
 describe('Testes para o usecase de cadastrar usuário', () => {
+	// MODULO QUE SERÁ MOCKADO
 	jest.mock('../../../../../src/app/features/usuarios/repositories');
 
 	// DEFINIÇÃO DO SUT
@@ -14,18 +15,23 @@ describe('Testes para o usecase de cadastrar usuário', () => {
 
 	// HOOKS
 	beforeAll(async () => {
+		// executa algo antes da execução dos testes
 		await DatabaseConnection.connect();
 		await RedisConnection.connect();
 	});
 
-	beforeEach(() => {});
+	beforeEach(() => {
+		// executa algo antes da execução de cada teste
+	});
 
 	afterEach(() => {
+		// executa algo depois da execução de cada teste
 		jest.clearAllMocks();
 	});
 
 	afterAll(() => {
-		// fechar/destruir a conexão com as base de dados Relacional e Não-Relacional
+		// executa algo depois da execução de todos os testes
+		// EX: fechar/destruir a conexão com as base de dados Relacional e Não-Relacional
 	});
 
 	test('Deve retornar true quando chamar o metodo execute passando um email que existe na base de dados', async () => {
@@ -49,9 +55,15 @@ describe('Testes para o usecase de cadastrar usuário', () => {
 		const sut = createSut();
 		const result = await sut.execute({ email: 'any_email', senha: 'any_value' });
 
-		expect(result.sucesso).toBe(true);
-		expect(result.mensagem).toBe('Usuário cadastrado com sucesso!');
-		expect(result.dados).toBeDefined();
-		expect(result.dados).toEqual(newUserMock.toJSON());
+		expect(result).toEqual({
+			sucesso: true,
+			mensagem: 'Usuário cadastrado com sucesso!',
+			dados: newUserMock.toJSON(),
+		});
+
+		// expect(result.sucesso).toBe(true);
+		// expect(result.mensagem).toBe('Usuário cadastrado com sucesso!');
+		// expect(result.dados).toBeDefined();
+		// expect(result.dados).toEqual(newUserMock.toJSON());
 	});
 });
