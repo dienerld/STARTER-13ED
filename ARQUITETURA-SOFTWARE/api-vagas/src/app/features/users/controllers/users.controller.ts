@@ -5,7 +5,7 @@ import { Result } from "../../../shared/utils/result.helper";
 import { CreateUserDTO } from "../DTO";
 import { CreateUserUsecase } from "../usecase/create.usecase";
 import { ListUsersUsecase } from "../usecase/list-all.usecase";
-import { ListApplications } from "../usecase/list-applications.usecase";
+import { ListApplications } from "../../jobs/usecase/list-applications.usecase";
 import { LoginUserUsecase } from "../usecase/login.usecase";
 
 export class UserController {
@@ -42,16 +42,6 @@ export class UserController {
     }
   }
 
-  static async listApplications(req: Request, res: Response) {
-    const { id } = req.user;
-    try {
-      const usecase = new ListApplications();
-      const result = await usecase.execute(id);
-      return httpHelper.success(res, result);
-    } catch (err: any) {
-      return httpHelper.badRequestError(res, Result.error(500, err.toString()));
-    }
-  }
 
   static async login(req: Request, res: Response) {
     const { username, password }: CreateUserDTO = req.body;

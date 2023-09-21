@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { auth, onlyAdmin, onlyCandidate } from "../../shared/middlewares";
-import { UserController } from "./controllers";
+import { Router } from 'express';
+import { auth, onlyAdmin, onlyCandidate } from '../../shared/middlewares';
+import { UserController } from './controllers';
 import {
   cleanInfo,
   createCandidateValidator,
@@ -8,37 +8,33 @@ import {
   fieldsValidator,
   filterUserValidator,
   loginValidator,
-} from "./middlewares";
+} from './middlewares';
 
 export default () => {
   const router = Router();
 
   // Criação de usuários “admin” - Requisito 1
   router.post(
-    "/users",
+    '/users',
     [auth, onlyAdmin, fieldsValidator, cleanInfo, createUserValidator],
     UserController.createUser
   );
 
   // Cadastro de usuários “candidato” - Requisito 4
   router.post(
-    "/candidates",
+    '/candidates',
     [fieldsValidator, cleanInfo, createCandidateValidator],
     UserController.createCadidate
   );
 
-  router.get(
-    "/candidates/applications",
-    [auth, onlyCandidate],
-    UserController.listApplications
-  );
+  router.get('/candidates/applications', [auth, onlyCandidate]);
 
   // Login de usuários - Requisito 2
-  router.post("/login", loginValidator, UserController.login);
+  router.post('/login', loginValidator, UserController.login);
 
   // Listagem de usuarios - Requisito 1, 3 e 4
   router.get(
-    "/users",
+    '/users',
     [auth, onlyAdmin, filterUserValidator],
     UserController.list
   );
