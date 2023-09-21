@@ -12,9 +12,8 @@
 		"migration:create": "yarn typeorm migration:create ./src/database/migrations/NomeMigration",
 		"typeorm": "typeorm-ts-node-commonjs",
 		"migration:run": "yarn typeorm migration:run -- -d src/main/config/database.config.ts",
-		
     "test": "jest --silent --noStackTrace --runInBand",
-		"test:verbose": "jest --verbose --runInBand --detectOpenHandles",
+    "test:verbose": "jest --verbose --runInBand --detectOpenHandles",
 		"test:coverage": "jest --runInBand --coverage",
 		"test:watch": "jest --silent --noStackTrace --runInBand --watchAll"
 	},

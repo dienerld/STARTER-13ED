@@ -19,4 +19,13 @@ export class DatabaseConnection {
 			console.log('Banco de dados conectado');
 		}
 	}
+
+	public static async destroy() {
+		if (!this._connection) {
+			throw new Error('A base de dados não está inicializada.');
+		}
+
+		await this._connection.destroy();
+		console.log('Conexão com a base de dados SQL destruida');
+	}
 }

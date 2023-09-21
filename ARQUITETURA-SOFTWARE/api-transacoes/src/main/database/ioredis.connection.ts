@@ -18,4 +18,13 @@ export class RedisConnection {
 			console.log('Base de dados de cache conectada!');
 		}
 	}
+
+	public static async destroy() {
+		if (!this._connection) {
+			throw new Error('A base de dados de cache não está inicializada.');
+		}
+
+		await this._connection.quit();
+		console.log('Conexão com a base de dados NoSQL destruida');
+	}
 }
