@@ -21,6 +21,10 @@ describe('Testes para o usecase de cadastrar usuário', () => {
 		await RedisConnection.destroy();
 	});
 
+	beforeAll(() => {
+		jest.clearAllMocks();
+	});
+
 	test('deve retornar um objeto de erro quando o usuario existir', async () => {
 		jest.spyOn(UsuariosRepository.prototype, 'verificarSeExisteUsuarioPorEmail').mockResolvedValue(true);
 
