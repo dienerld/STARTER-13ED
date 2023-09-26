@@ -4,7 +4,6 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "npx tsc",
 		"start": "node ./dist/main/server.js",
 		"dev": "ts-node-dev --respawn --transpile-only ./src/main/server.ts",
@@ -12,7 +11,11 @@
 		"dev:db": "ts-node-dev --respawn --transpile-only ./src/database/test-connection-db.ts",
 		"migration:create": "yarn typeorm migration:create ./src/database/migrations/NomeMigration",
 		"typeorm": "typeorm-ts-node-commonjs",
-		"migration:run": "yarn typeorm migration:run -- -d src/main/config/database.config.ts"
+		"migration:run": "yarn typeorm migration:run -- -d src/main/config/database.config.ts",
+    "test": "jest --silent --noStackTrace --runInBand",
+    "test:verbose": "jest --verbose --runInBand --detectOpenHandles",
+		"test:coverage": "jest --runInBand --coverage",
+		"test:watch": "jest --silent --noStackTrace --runInBand --watchAll"
 	},
 	"keywords": [],
 	"author": "",
@@ -30,8 +33,13 @@
 		"@types/cors": "^2.8.13",
 		"@types/dotenv": "^8.2.0",
 		"@types/express": "^4.17.17",
+		"@types/jest": "^29.5.5",
 		"@types/node": "^20.4.8",
 		"@types/pg": "^8.10.2",
+		"@types/supertest": "^2.0.12",
+		"jest": "^29.7.0",
+		"supertest": "^6.3.3",
+		"ts-jest": "^29.1.1",
 		"ts-node-dev": "^2.0.0",
 		"typescript": "^5.1.6"
 	}
