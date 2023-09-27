@@ -5,7 +5,7 @@ import { JobsRepository } from '../repository';
 
 const PREFIX_CACHE = 'list-candidates';
 
-export class listCandidatesByJob {
+export class ListCandidatesByJobUsecase {
   async execute(jobId: string, userId: string): Promise<ResultDTO> {
     const repository = new JobsRepository();
     const cacheRepository = new CacheRepository();

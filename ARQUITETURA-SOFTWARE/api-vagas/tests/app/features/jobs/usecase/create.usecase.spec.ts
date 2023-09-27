@@ -1,8 +1,8 @@
-import { CreateJobDTO } from "../../../../../src/app/features/jobs/DTO";
-import { JobsRepository } from "../../../../../src/app/features/jobs/repository";
-import { CreateJobUsecase } from "../../../../../src/app/features/jobs/usecase";
-import { Job } from "../../../../../src/app/models/job.model";
-import { DatabaseConnection } from "../../../../../src/main/database/typeorm.connection";
+import { CreateJobDTO } from "@app/features/jobs/DTO";
+import { JobsRepository } from "@app/features/jobs/repository";
+import { CreateJobUsecase } from "@app/features/jobs/usecase";
+import { Job } from "@app/models/job.model";
+import { DatabaseConnection } from "@main/database/typeorm.connection";
 
 const makeSut = () => {
   const usecase = new CreateJobUsecase();
@@ -22,7 +22,7 @@ const makeSut = () => {
 };
 
 describe("[Usecase - Jobs] - Create", () => {
-  jest.mock("../../../../../src/app/features/jobs/repository/jobs.repository");
+  jest.mock("@app/features/jobs/repository/jobs.repository");
 
   beforeAll(async () => {
     await DatabaseConnection.connect();

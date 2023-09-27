@@ -1,9 +1,10 @@
-import { CreateUserDTO } from '../../../../../src/app/features/users/DTO';
-import { UsersRepository } from '../../../../../src/app/features/users/repository/users.repository';
-import { CreateUserUsecase } from '../../../../../src/app/features/users/usecase/create.usecase';
-import { User } from '../../../../../src/app/models/user.model';
-import { Profile } from '../../../../../src/app/shared/enums';
-import { DatabaseConnection } from '../../../../../src/main/database/typeorm.connection';
+import { CreateUserDTO } from '@app/features/users/DTO';
+import { UsersRepository } from '@app/features/users/repository/users.repository';
+import { CreateUserUsecase } from '@app/features/users/usecase/create.usecase';
+import { User } from '@app/models/user.model';
+import { Profile } from '@app/shared/enums';
+import { jwt } from '@app/shared/utils';
+import { DatabaseConnection } from '@main/database/typeorm.connection';
 
 const makeSut = () => {
   const usecase = new CreateUserUsecase();
@@ -93,6 +94,8 @@ describe('[Usecase - User] - Create', () => {
       .mockResolvedValueOnce({} as User);
 
     const response = await usecase.execute(dto);
+
+    jest.spyOn(jwt, 'encoded').mockImplementationOnce((input) => '');
 
     expect(response.code).toBe(400);
     expect(response.message).toBe('User already exists');

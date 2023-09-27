@@ -4,7 +4,7 @@ import { CandidateJobsRepository } from '../repository';
 
 const PREFIX_CACHE = 'list-applications';
 
-export class ListApplications {
+export class ListApplicationsUsecase {
   async execute(userId: string) {
     const repository = new CandidateJobsRepository();
     const cacheRepository = new CacheRepository();

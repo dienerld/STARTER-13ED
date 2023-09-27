@@ -1,13 +1,13 @@
-import { UsersRepository } from "../../../../../src/app/features/users/repository/users.repository";
-import { LoginUserUsecase } from "../../../../../src/app/features/users/usecase/login.usecase";
-import { User } from "../../../../../src/app/models/user.model";
-import { Profile } from "../../../../../src/app/shared/enums";
-import { bcrypt, jwt } from "../../../../../src/app/shared/utils";
-import { DatabaseConnection } from "../../../../../src/main/database/typeorm.connection";
+import { UsersRepository } from "@app/features/users/repository/users.repository";
+import { LoginUserUsecase } from "@app/features/users/usecase/login.usecase";
+import { User } from "@app/models/user.model";
+import { Profile } from "@app/shared/enums";
+import { bcrypt, jwt } from "@app/shared/utils";
+import { DatabaseConnection } from "@main/database/typeorm.connection";
 
 describe("[Usecase - User] - Login", () => {
   jest.mock(
-    "../../../../../src/app/features/users/repository/users.repository"
+    "@app/features/users/repository/users.repository"
   );
 
   beforeAll(async () => {
