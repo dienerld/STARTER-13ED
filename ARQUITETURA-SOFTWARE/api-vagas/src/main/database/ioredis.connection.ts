@@ -18,4 +18,12 @@ export class RedisConnection {
       console.log("Base de dados de cache conectada!");
     }
   }
+
+  public static async destroy() {
+    if (!this._connection) {
+      throw new Error("Base não está conectada!");
+    }
+    await this._connection.quit();
+    console.log("Base de dados de cache desconectada!");
+  }
 }
