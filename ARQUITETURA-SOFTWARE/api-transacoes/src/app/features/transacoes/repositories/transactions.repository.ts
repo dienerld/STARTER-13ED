@@ -3,7 +3,7 @@ import { TipoTransacao, Transacao, Usuario } from '../../../models';
 
 import { DatabaseConnection } from '../../../../main/database';
 import { TransacaoEntity } from '../../../shared/database/entities';
-type CadastrarDTO = {
+export type CadastrarDTO = {
 	idUsuario: string;
 	valor: number;
 	tipo: TipoTransacao;
@@ -131,6 +131,10 @@ export class TransacoesRepository {
 
 	public async deletarTransacao(idTransacao: string): Promise<void> {
 		await this._manager.delete(TransacaoEntity, { id: idTransacao });
+	}
+
+	public async clear() {
+		await this._manager.delete(TransacaoEntity, {});
 	}
 
 	// TRANSFORMA RESULTADO DA BUSCA EM UMA INSTANCIA DA MODEL

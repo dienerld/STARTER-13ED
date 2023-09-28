@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import { BeforeInsert, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from 'typeorm';
 import { EnderecoEntity } from './endereco.entity';
 import { TransacaoEntity } from './transacao.entity';
@@ -50,7 +51,7 @@ export class UsuarioEntity {
 
 	@BeforeInsert()
 	beforeInsert() {
-		// this.id = randomUUID();
+		this.id = randomUUID();
 		this.criadoEm = new Date();
 	}
 }
