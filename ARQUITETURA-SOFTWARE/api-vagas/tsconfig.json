@@ -11,6 +11,9 @@
       ],
       "@main/*": [
         "./src/main/*"
+      ],
+      "@tests/*": [
+        "./tests/*"
       ]
     },
     "outDir": "./dist",

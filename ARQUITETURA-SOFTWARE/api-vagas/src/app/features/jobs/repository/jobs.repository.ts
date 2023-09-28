@@ -1,8 +1,8 @@
-import { DatabaseConnection } from '../../../../main/database/typeorm.connection';
-import { Job } from '../../../models/job.model';
-import { User } from '../../../models/user.model';
-import { JobEntity, UserEntity } from '../../../shared/entities';
-import { CreateJobDTO } from '../DTO';
+import { DatabaseConnection } from "../../../../main/database/typeorm.connection";
+import { Job } from "../../../models/job.model";
+import { User } from "../../../models/user.model";
+import { JobEntity, UserEntity } from "../../../shared/entities";
+import { CreateJobDTO, JobDTO } from "../DTO";
 
 export class JobsRepository {
   private _manager = DatabaseConnection.connection.manager;
@@ -15,6 +15,10 @@ export class JobsRepository {
     await this._manager.save(createdJob);
 
     return this.entityToModel(createdJob);
+  }
+
+  async update(job: JobDTO): Promise<void> {
+    await this._manager.update(JobEntity, { id: job.id }, job);
   }
 
   async getJobByID(idJob: string): Promise<Job | undefined> {
