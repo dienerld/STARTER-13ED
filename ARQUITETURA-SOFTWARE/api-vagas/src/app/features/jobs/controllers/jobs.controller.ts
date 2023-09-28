@@ -1,9 +1,12 @@
 import { Request, Response } from 'express';
 import { httpHelper } from '../../../shared/utils';
 import { Result } from '../../../shared/utils/result.helper';
-import { ApplyJobUsecase, CreateJobUsecase } from '../usecase';
-import { ListApplications } from '../usecase/list-applications.usecase';
-import { listCandidatesByJob } from '../usecase/list-candidates-by-job.usecase';
+import {
+  ApplyJobUsecase,
+  CreateJobUsecase,
+  ListApplicationsUsecase,
+  ListCandidatesByJobUsecase,
+} from "../usecase";
 
 export class JobsController {
   static async createJob(req: Request, res: Response) {
@@ -44,7 +47,7 @@ export class JobsController {
   static async listApplications(req: Request, res: Response) {
     const { id } = req.user;
     try {
-      const usecase = new ListApplications();
+      const usecase = new ListApplicationsUsecase();
       const result = await usecase.execute(id);
       return httpHelper.success(res, result);
     } catch (err: any) {
@@ -57,7 +60,7 @@ export class JobsController {
     const { id } = req.user;
 
     try {
-      const usecase = new listCandidatesByJob();
+      const usecase = new ListCandidatesByJobUsecase();
       const result = await usecase.execute(idJob, id);
 
       if (!result.ok) {
