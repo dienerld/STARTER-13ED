@@ -1,10 +1,10 @@
-import { ListCandidatesByJobUsecase } from "../../../../../src/app/features/jobs/usecase";
-import { DatabaseConnection } from "../../../../../src/main/database/typeorm.connection";
-import { RedisConnection } from "../../../../../src/main/database/ioredis.connection";
-import { CacheRepository } from "../../../../../src/app/shared/cache/cache.repository";
-import { JobsRepository } from "../../../../../src/app/features/jobs/repository";
-import { User } from "../../../../../src/app/models/user.model";
-import { Profile } from "../../../../../src/app/shared/enums";
+import { ListCandidatesByJobUsecase } from "@app/features/jobs/usecase";
+import { DatabaseConnection } from "@main/database/typeorm.connection";
+import { RedisConnection } from "@main/database/ioredis.connection";
+import { CacheRepository } from "@app/shared/cache/cache.repository";
+import { JobsRepository } from "@app/features/jobs/repository";
+import { User } from "@app/models/user.model";
+import { Profile } from "@app/shared/enums";
 
 function makeSut() {
   const usecase = new ListCandidatesByJobUsecase();
@@ -23,7 +23,7 @@ function makeSut() {
 }
 
 describe("[Usecase - Jobs] - List", () => {
-  jest.mock("../../../../../src/app/features/jobs/repository");
+  jest.mock("@app/features/jobs/repository");
   jest.mock("ioredis", () => require("ioredis-mock"));
 
   beforeAll(async () => {
@@ -74,7 +74,6 @@ describe("[Usecase - Jobs] - List", () => {
   it("should returns 200 with array candidates in cache", async () => {
     const { mockUser, usecase } = makeSut();
 
-
     jest
       .spyOn(CacheRepository.prototype, "get")
       .mockResolvedValueOnce([mockUser.toJSON()]);
@@ -88,7 +87,6 @@ describe("[Usecase - Jobs] - List", () => {
 
   it("should return status 400 when not found job", async () => {
     const { usecase } = makeSut();
-
 
     jest
       .spyOn(CacheRepository.prototype, "get")

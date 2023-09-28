@@ -4,7 +4,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "commonjs",
-    "rootDir": "./",
     "baseUrl": "./",
     "paths": {
       "@app/*": [
@@ -26,9 +25,6 @@
       "tsconfig-paths/register"
     ]
   },
-  "include": [
-    "./src/**/*.ts"
-  ],
   "exclude": [
     "node_modules"
   ]

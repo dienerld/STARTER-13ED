@@ -1,13 +1,13 @@
-import { ListApplicationsUsecase } from "../../../../../src/app/features/jobs/usecase";
-import { DatabaseConnection } from "../../../../../src/main/database/typeorm.connection";
-import { RedisConnection } from "../../../../../src/main/database/ioredis.connection";
-import { CacheRepository } from "../../../../../src/app/shared/cache/cache.repository";
-import { CandidateJobsRepository } from "../../../../../src/app/features/jobs/repository";
-import { CandidateJobEntity } from "../../../../../src/app/shared/entities";
+import { ListApplicationsUsecase } from "@app/features/jobs/usecase";
+import { DatabaseConnection } from "@main/database/typeorm.connection";
+import { RedisConnection } from "@main/database/ioredis.connection";
+import { CacheRepository } from "@app/shared/cache/cache.repository";
+import { CandidateJobsRepository } from "@app/features/jobs/repository";
+import { CandidateJobEntity } from "@app/shared/entities";
 
 describe("[Usecase - Jobs] - List", () => {
   jest.setTimeout(10000);
-  jest.mock("../../../../../src/app/features/jobs/repository");
+  jest.mock("@app/features/jobs/repository");
   jest.mock("ioredis", () => require("ioredis-mock"));
 
   beforeAll(async () => {
