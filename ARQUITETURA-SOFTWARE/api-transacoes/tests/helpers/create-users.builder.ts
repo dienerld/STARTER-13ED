@@ -3,7 +3,7 @@ import { UsuariosRepository } from '../../src/app/features/usuarios/repositories
 export async function createUsers() {
 	const repoUsuario = new UsuariosRepository();
 
-	const userData1 = { email: 'any_email1', senha: 'any_senha' };
+	const userData1 = { email: 'any_email@teste.com', senha: 'any_senha' };
 	const userData2 = { email: 'any_email2', senha: 'any_senha' };
 	const userData3 = { email: 'any_email3', senha: 'any_senha' };
 
