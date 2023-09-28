@@ -62,6 +62,10 @@ export class UsuariosRepository {
 		return this.entityToModel(usuarioEncontrado);
 	}
 
+	public async clear() {
+		await this._manager.delete(UsuarioEntity, {});
+	}
+
 	// TRANSFORMA RESULTADO DA BUSCA EM UMA INSTANCIA DA MODEL
 	private entityToModel(dadosDB: UsuarioEntity): Usuario {
 		const { endereco } = dadosDB;
