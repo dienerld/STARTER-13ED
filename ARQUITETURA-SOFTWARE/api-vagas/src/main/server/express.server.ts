@@ -19,4 +19,6 @@ export function runServer() {
 	app.listen(appEnvs.port, () =>
 		console.log("API esta rodando na porta " + appEnvs.port)
 	);
+
+  return app;
 }

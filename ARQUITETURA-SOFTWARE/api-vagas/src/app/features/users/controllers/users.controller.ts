@@ -5,7 +5,6 @@ import { Result } from "../../../shared/utils/result.helper";
 import { CreateUserDTO } from "../DTO";
 import { CreateUserUsecase } from "../usecase/create.usecase";
 import { ListUsersUsecase } from "../usecase/list-all.usecase";
-import { ListApplications } from "../../jobs/usecase/list-applications.usecase";
 import { LoginUserUsecase } from "../usecase/login.usecase";
 
 export class UserController {

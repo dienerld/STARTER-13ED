@@ -1,11 +1,12 @@
-import { Request, Response } from 'express';
-import { httpHelper } from '../../../shared/utils';
-import { Result } from '../../../shared/utils/result.helper';
+import { Request, Response } from "express";
+import { httpHelper } from "../../../shared/utils";
+import { Result } from "../../../shared/utils/result.helper";
 import {
   ApplyJobUsecase,
   CreateJobUsecase,
   ListApplicationsUsecase,
   ListCandidatesByJobUsecase,
+  UpdateStatusJob,
 } from "../usecase";
 
 export class JobsController {
@@ -66,6 +67,24 @@ export class JobsController {
       if (!result.ok) {
         return httpHelper.badRequestError(res, result);
       }
+      return httpHelper.success(res, result);
+    } catch (err: any) {
+      return httpHelper.badRequestError(res, Result.error(500, err.toString()));
+    }
+  }
+
+  static async updateStatus(req: Request, res: Response) {
+    const { isOpen } = req.body;
+    const { idJob } = req.params;
+
+    try {
+      const usecase = new UpdateStatusJob();
+      const result = await usecase.execute(idJob, isOpen);
+
+      if (!result.ok) {
+        return httpHelper.badRequestError(res, result);
+      }
+
       return httpHelper.success(res, result);
     } catch (err: any) {
       return httpHelper.badRequestError(res, Result.error(500, err.toString()));

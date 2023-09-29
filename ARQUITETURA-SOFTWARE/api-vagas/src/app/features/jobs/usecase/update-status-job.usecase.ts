@@ -9,6 +9,10 @@ export class UpdateStatusJob {
       const repository = new JobsRepository();
       const cacheRepository = new CacheRepository();
 
+      if (newStatus === undefined) {
+        return Result.error(400, "Missing status");
+      }
+
       const job = await repository.getJobByID(idJob);
 
       if (!job) {
