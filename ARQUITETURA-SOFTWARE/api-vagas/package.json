@@ -3,6 +3,31 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "tsnd --respawn --transpile-only ./src/main/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:create": "yarn typeorm migration:create ./src/app/shared/migrations/<Nome-Migration>",
+    "migration:run": "yarn typeorm migration:run -d ./src/main/config/typeorm.config.ts",
+    "migration:revert": "yarn typeorm migration:revert -d ./src/main/config/typeorm.config.ts",
+    "test": "cross-env NODE_ENV=test jest --silent --noStackTrace --runInBand",
+    "test:verbose": "yarn test --verbose --detectOpenHandles",
+    "test:coverage": "yarn test --coverage",
+    "test:watch": "yarn test --watchAll",
+    "test:integration": "yarn test -c ./jest.config.integration.ts",
+    "test:setup": "cross-env NODE_ENV=test yarn migration:run"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "ioredis": "^5.3.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.17"
+  },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.14",
@@ -18,27 +43,5 @@
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "ioredis": "^5.3.2",
-    "jsonwebtoken": "^9.0.2",
-    "pg": "^8.11.3",
-    "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.17"
-  },
-  "scripts": {
-    "dev": "tsnd --respawn --transpile-only ./src/main/index.ts",
-    "typeorm": "typeorm-ts-node-commonjs",
-    "migration:create": "yarn typeorm migration:create ./src/app/shared/migrations/<Nome-Migration>",
-    "migration:run": "yarn typeorm migration:run -d ./src/main/config/typeorm.config.ts",
-    "migration:revert": "yarn typeorm migration:revert -d ./src/main/config/typeorm.config.ts",
-    "test": "jest --silent --noStackTrace --runInBand",
-    "test:verbose": "jest --verbose --runInBand --detectOpenHandles",
-    "test:coverage": "jest --runInBand --coverage",
-    "test:watch": "jest --silent --noStackTrace --runInBand --watchAll"
   }
 }

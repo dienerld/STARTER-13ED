@@ -17,8 +17,16 @@ export class JobsRepository {
     return this.entityToModel(createdJob);
   }
 
-  async update(job: JobDTO): Promise<void> {
-    await this._manager.update(JobEntity, { id: job.id }, job);
+  async update({ company, maxCandidates, ...job }: JobDTO): Promise<void> {
+    await this._manager.update(
+      JobEntity,
+      { id: job.id },
+      {
+        ...job,
+        companyName: company,
+        maxCandidate: maxCandidates,
+      }
+    );
   }
 
   async getJobByID(idJob: string): Promise<Job | undefined> {

@@ -26,7 +26,7 @@ export class User extends BaseModel {
     company?: string
   ) {
     super();
-    this.id = id;
+    this._id = id;
     this.#username = username;
     this.#name = name;
     this.#password = password;
@@ -37,7 +37,7 @@ export class User extends BaseModel {
 
   public toJSON(): UserJSON {
     return {
-      id: this.id,
+      id: this._id,
       name: this.#name,
       username: this.#username,
       profile: this.#profile,

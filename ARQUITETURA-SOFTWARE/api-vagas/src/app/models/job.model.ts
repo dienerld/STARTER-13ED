@@ -19,7 +19,7 @@ export class Job extends BaseModel {
     maxCandidates?: number
   ) {
     super();
-    this.id = id;
+    this._id = id;
     this.#description = description;
     this.#company = company;
     this.#limitDate = limitDate;
@@ -27,6 +27,7 @@ export class Job extends BaseModel {
     this.#idRecruiter = idRecruiter;
     this.#maxCandidates = maxCandidates;
   }
+
 
   update(data: Partial<CreateJobDTO>) {
     if (data.isOpen !== undefined) {

@@ -6,13 +6,11 @@ const isProd = appEnvs.enviroment === "production";
 const rootDir = isProd ? "dist" : "src";
 
 export default new DataSource({
-	type: "postgres",
-	url: appEnvs.dbURL,
-	schema: "public",
-	entities: [rootDir + "/app/shared/entities/**/*"],
-	migrations: [rootDir + "/app/shared/migrations/**/*"],
-	synchronize: false,
-	ssl: {
-		rejectUnauthorized: false,
-	},
+  type: "postgres",
+  url: appEnvs.enviroment === "test" ? appEnvs.dbURL_TEST : appEnvs.dbURL,
+  schema: "public",
+  entities: [rootDir + "/app/shared/entities/**/*"],
+  migrations: [rootDir + "/app/shared/migrations/**/*"],
+  synchronize: false,
+  ssl: false
 });
